@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>নিউজরুম সিএমএস | দ্য ডেইলি অরিজিন</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Hind Siliguri (UI), Noto Serif Bengali (Headlines) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SunEditor (Rich Text) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --color-brand-black: #000000;
+        --color-brand-red: #c90000;
+        --font-sans: "Hind Siliguri", sans-serif;
+        --font-serif: "Noto Serif Bengali", serif;
+        --font-display: "Noto Serif Bengali", serif;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background-color: #f8fafc; /* Slate-50 */
+        color: #1e293b; /* Slate-800 */
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: var(--font-display);
+      }
+
+      /* --- Custom Components --- */
+
+      .btn-primary {
+        background-color: var(--color-brand-black);
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.2s;
+        border: 1px solid var(--color-brand-black);
+      }
+      .btn-primary:hover {
+        background-color: var(--color-brand-red);
+        border-color: var(--color-brand-red);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: #64748b;
+        border: 1px solid #cbd5e1;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        border-color: var(--color-brand-black);
+        color: var(--color-brand-black);
+      }
+
+      .btn-danger {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+      }
+      .btn-danger:hover {
+        background-color: #ef4444;
+        color: white;
+        border-color: #ef4444;
+      }
+
+      /* Form Elements */
+      .input-field {
+        width: 100%;
+        border: 1px solid #e2e8f0;
+        background-color: #fff;
+        padding: 0.75rem;
+        font-family: var(--font-sans);
+        color: #0f172a;
+        border-radius: 0; /* Sharp edges for editorial feel */
+        transition: border-color 0.2s;
+      }
+      .input-field:focus {
+        outline: none;
+        border-color: var(--color-brand-black);
+        box-shadow: 0 0 0 1px var(--color-brand-black);
+      }
+
+      /* Sidebar */
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: #94a3b8;
+        font-weight: 500;
+        transition: all 0.2s;
+        border-left: 3px solid transparent;
+      }
+      .sidebar-link:hover {
+        color: white;
+        background-color: #1e1e1e;
+      }
+      .sidebar-link.active {
+        color: white;
+        background-color: #1e1e1e;
+        border-left-color: var(--color-brand-red);
+      }
+
+      /* Stats Card */
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+        border-top: 4px solid var(--color-brand-black);
+      }
+
+      /* Table Styles */
+      .cms-table th {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem;
+        color: #64748b;
+        font-weight: 700;
+        padding: 1rem 1.5rem;
+        border-bottom: 2px solid #e2e8f0;
+        background-color: #f8fafc;
+      }
+      .cms-table td {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 0.95rem;
+      }
+      .cms-table tr:hover td {
+        background-color: #f8fafc;
+      }
+
+      /* Status Badges */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .badge-success {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .badge-warning {
+        background-color: #fef9c3;
+        color: #854d0e;
+      }
+      .badge-gray {
+        background-color: #f1f5f9;
+        color: #475569;
+      }
+
+      /* SunEditor Override for Professional Look */
+      .sun-editor {
+        border: 1px solid #e2e8f0 !important;
+        font-family: var(--font-sans) !important;
+      }
+      .sun-editor .se-toolbar {
+        background: #f8fafc !important;
+        outline: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+      }
+      .sun-editor .se-btn-tray {
+        padding: 4px !important;
+      }
+
+      /* Toast */
+      #toast-notification {
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #toast-notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Loader */
+      .loader {
+        border-top-color: var(--color-brand-red);
+        -webkit-animation: spinner 1.5s linear infinite;
+        animation: spinner 1.5s linear infinite;
+      }
+      @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="h-screen flex flex-col overflow-hidden">
+    <!-- 1. LOGIN VIEW -->
+    <div
+      id="auth-container"
+      class="fixed inset-0 z-50 bg-[#f8fafc] flex flex-col items-center justify-center p-4"
+    >
+      <div
+        class="w-full max-w-md bg-white border border-gray-200 shadow-xl p-8 md:p-12 relative overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-full h-1 bg-black"></div>
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-black tracking-tight mb-2">
+            দ্য ডেইলি অরিজিন
+          </h1>
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400">
+            নিউজরুম সিএমএস এক্সেস
+          </p>
+        </div>
+
+        <form id="login-form" class="space-y-6">
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+              >ইমেইল আইডি</label
+            >
+            <input
+              type="email"
+              id="login-email"
+              class="input-field"
+              placeholder="editor@thedailyorigin.com"
+              required
+            />
+          </div>
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+              >পাসওয়ার্ড</label
+            >
+            <input
+              type="password"
+              id="login-password"
+              class="input-field"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          <button type="submit" class="w-full btn-primary py-4">
+            প্রবেশ করুন
+          </button>
+        </form>
+        <p
+          id="login-error"
+          class="text-red-600 text-center text-sm mt-6 font-medium"
+        ></p>
+      </div>
+      <p class="mt-8 text-gray-400 text-xs text-center">
+        &copy; ২০২৫ দ্য ডেইলি অরিজিন মিডিয়া গ্রুপ। <br />অনুমোদিত প্রবেশ
+        নিষিদ্ধ।
+      </p>
+    </div>
+
+    <!-- 2. LOADING STATE -->
+    <div
+      id="loading-container"
+      class="fixed inset-0 z-40 bg-white hidden flex flex-col items-center justify-center"
+    >
+      <div
+        class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"
+      ></div>
+      <h2 class="text-xl font-display font-bold text-gray-800">
+        যাচাইকরণ চলছে...
+      </h2>
+    </div>
+
+    <!-- 3. MAIN DASHBOARD LAYOUT -->
+    <div id="admin-dashboard" class="hidden flex h-full">
+      <!-- Sidebar Navigation -->
+      <aside
+        class="w-64 bg-black text-white hidden md:flex flex-col flex-shrink-0 z-20"
+      >
+        <div
+          class="h-16 flex items-center px-6 bg-black border-b border-gray-900"
+        >
+          <span class="font-display font-bold text-xl tracking-tight"
+            >টিডিও <span class="text-[#C90000]">.</span> অ্যাডমিন</span
+          >
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4">
+          <div class="px-6 mb-2">
+            <p
+              class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
+            >
+              সম্পাদকীয়
+            </p>
+          </div>
+          <button data-view="articles" class="sidebar-link w-full active">
+            <i data-lucide="file-text" class="w-5 h-5 mr-3"></i> নিবন্ধসমূহ
+          </button>
+          <button data-view="authors" class="sidebar-link w-full">
+            <i data-lucide="users" class="w-5 h-5 mr-3"></i> লেখকবৃন্দ
+          </button>
+
+          <div class="px-6 mt-8 mb-2">
+            <p
+              class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
+            >
+              সিস্টেম
+            </p>
+          </div>
+          <button data-view="users" class="sidebar-link w-full">
+            <i data-lucide="shield" class="w-5 h-5 mr-3"></i> অ্যাক্সেস কন্ট্রোল
+          </button>
+          <button data-view="settings" class="sidebar-link w-full">
+            <i data-lucide="settings" class="w-5 h-5 mr-3"></i> সেটিংস
+          </button>
+        </nav>
+
+        <div class="p-4 border-t border-gray-900 bg-[#0a0a0a]">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded bg-[#C90000] flex items-center justify-center text-xs font-bold"
+            >
+              U
+            </div>
+            <div class="flex-1 overflow-hidden">
+              <p
+                id="user-email-display"
+                class="text-xs font-medium text-gray-300 truncate"
+              >
+                user@example.com
+              </p>
+              <p class="text-[10px] text-gray-500 uppercase tracking-wider">
+                অনলাইন
+              </p>
+            </div>
+            <button
+              id="logout-button"
+              class="text-gray-500 hover:text-white transition-colors"
+            >
+              <i data-lucide="log-out" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Wrapper -->
+      <div class="flex-1 flex flex-col min-w-0 bg-[#f8fafc] overflow-hidden">
+        <!-- Mobile Header -->
+        <header
+          class="md:hidden bg-black text-white h-16 flex items-center justify-between px-4 z-20"
+        >
+          <span class="font-display font-bold text-xl">দ্য ডেইলি অরিজিন</span>
+          <button id="mobile-menu-toggle">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </header>
+
+        <!-- Top Utility Bar (Desktop) -->
+        <header
+          class="hidden md:flex h-16 bg-white border-b border-gray-200 items-center justify-between px-8"
+        >
+          <div class="flex items-center text-sm text-gray-500 font-medium">
+            <span class="text-gray-400">ড্যাশবোর্ড</span>
+            <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+            <span id="breadcrumb-current" class="text-black font-bold"
+              >ওভারভিউ</span
+            >
+          </div>
+          <div class="flex items-center gap-4">
+            <a
+              href="home.html"
+              target="_blank"
+              class="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#C90000] transition-colors flex items-center gap-2"
+            >
+              লাইভ সাইট দেখুন
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <main id="content-view" class="flex-1 overflow-y-auto p-4 md:p-8">
+          <!-- Content injected via JS -->
+        </main>
+      </div>
+    </div>
+
+    <!-- 4. MODALS -->
+
+    <!-- Article Editor Modal -->
+    <dialog
+      id="article-modal"
+      class="bg-transparent p-0 w-full max-w-5xl h-[90vh] backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    >
+      <div
+        class="bg-white w-full h-full flex flex-col shadow-2xl overflow-hidden rounded-lg"
+      >
+        <!-- Modal Header -->
+        <div
+          class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-gray-50"
+        >
+          <h3 id="modal-title" class="font-display font-bold text-xl">
+            গল্প লিখুন
+          </h3>
+          <div class="flex items-center gap-3">
+            <button
+              id="modal-cancel-btn"
+              class="btn-outline py-2 border-gray-300"
+            >
+              বাতিল
+            </button>
+            <button id="modal-save-btn" class="btn-primary py-2">
+              প্রকাশ করুন
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal Body (Scrollable) -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-10 bg-white">
+          <form id="article-form" class="max-w-4xl mx-auto space-y-8">
+            <input type="hidden" id="article-id-input" />
+
+            <!-- Top Meta -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div class="md:col-span-8 space-y-4">
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                    >শিরোনাম</label
+                  >
+                  <input
+                    type="text"
+                    id="article-title"
+                    class="input-field text-2xl font-display font-bold placeholder-gray-300 border-gray-200"
+                    placeholder="আকর্ষণীয় শিরোনাম লিখুন..."
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                    >লিড সামারি</label
+                  >
+                  <textarea
+                    id="article-summary"
+                    rows="3"
+                    class="input-field font-serif text-gray-600"
+                    placeholder="প্রিভিউ কার্ডের জন্য সংক্ষিপ্ত সারমর্ম..."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Sidebar Meta -->
+              <div
+                class="md:col-span-4 space-y-4 bg-gray-50 p-6 border border-gray-100 h-fit"
+              >
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                    >স্ট্যাটাস</label
+                  >
+                  <select id="article-status" class="input-field text-sm">
+                    <option value="Draft">খসড়া (Draft)</option>
+                    <option value="Published">প্রকাশিত (Published)</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                    >বিভাগ</label
+                  >
+                  <select id="article-category" class="input-field text-sm">
+                    <option value="World">বিশ্ব (World)</option>
+                    <option value="Politics">রাজনীতি (Politics)</option>
+                    <option value="Tech">প্রযুক্তি (Tech)</option>
+                    <option value="Science">বিজ্ঞান (Science)</option>
+                    <option value="Culture">সংস্কৃতি (Culture)</option>
+                    <option value="Sports">খেলাধুলা (Sports)</option>
+                    <option value="Business">বাণিজ্য (Business)</option>
+                    <option value="Others">অন্যান্য (Others)</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                    >লেখক</label
+                  >
+                  <select
+                    id="article-author-select"
+                    class="input-field text-sm"
+                  >
+                    <option value="">লেখক নির্বাচন করুন...</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image & Flags -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start border-t border-b border-gray-100 py-8"
+            >
+              <div>
+                <label
+                  class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                  >হিরো ইমেজ ইউআরএল</label
+                >
+                <input
+                  type="url"
+                  id="article-image-url"
+                  class="input-field"
+                  placeholder="https://..."
+                  required
+                />
+              </div>
+              <div class="space-y-3">
+                <p
+                  class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1"
+                >
+                  প্লেসমেন্ট
+                </p>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="article-isHero"
+                    class="w-4 h-4 text-black focus:ring-black border-gray-300 rounded"
+                  />
+                  <span class="text-sm font-medium">হিরো স্টোরি (হোমপেজ)</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="article-isTopStory"
+                    class="w-4 h-4 text-black focus:ring-black border-gray-300 rounded"
+                  />
+                  <span class="text-sm font-medium"
+                    >টপ স্টোরি (সংবাদ সংক্ষেপ)</span
+                  >
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="article-isBreaking"
+                    class="w-4 h-4 text-black focus:ring-black border-gray-300 rounded"
+                  />
+                  <span class="text-sm font-medium">ব্রেকিং নিউজ টিকার</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Editor -->
+            <div>
+              <label
+                class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                >মূল খবর</label
+              >
+              <div class="border border-gray-200">
+                <textarea id="article-body" class="w-full h-96"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Delete Confirmation Modal -->
+    <dialog
+      id="delete-confirm-modal"
+      class="bg-white p-8 rounded-none shadow-2xl border-t-4 border-red-600 max-w-sm w-full backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    >
+      <h2 class="font-display font-bold text-2xl mb-2 text-black">
+        মুছে ফেলার নিশ্চিতকরণ
+      </h2>
+      <p class="text-gray-600 mb-6 text-sm">
+        এই কাজটি স্থায়ী এবং পূর্বাবস্থায় ফেরানো যাবে না। আপনি কি নিশ্চিত?
+      </p>
+      <input type="hidden" id="delete-confirm-id" />
+      <div class="flex justify-end gap-3">
+        <button id="delete-cancel-btn" class="btn-outline py-2 px-4 text-xs">
+          বাতিল
+        </button>
+        <button
+          id="delete-confirm-btn"
+          class="bg-red-600 text-white font-bold uppercase text-xs px-4 py-2 hover:bg-red-700 transition"
+        >
+          হ্যাঁ, মুছে ফেলুন
+        </button>
+      </div>
+    </dialog>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast-notification"
+      class="fixed bottom-6 right-6 z-50 bg-black text-white px-6 py-4 shadow-2xl flex items-center gap-4 border-l-4 border-[#C90000]"
+    >
+      <i
+        id="toast-icon"
+        data-lucide="check-circle"
+        class="w-5 h-5 text-[#C90000]"
+      ></i>
+      <span id="toast-message" class="font-medium text-sm"
+        >সফলভাবে সম্পন্ন হয়েছে।</span
+      >
+    </div>
+
+    <!-- FIREBASE LOGIC -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+        setDoc,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        collection,
+        onSnapshot,
+        query,
+        where,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+      // --- Config ---
+      const firebaseConfig = {
+        apiKey: "AIzaSyBoX_PFwnE_46ONEeZsGk4ekd-O2Z4KOZ8",
+        authDomain: "news-site-bn.firebaseapp.com",
+        projectId: "news-site-bn",
+        storageBucket: "news-site-bn.firebasestorage.app",
+        messagingSenderId: "550344436218",
+        appId: "1:550344436218:web:d0283c99de7ae8d2a65c43",
+        measurementId: "G-Y45KW1L6Q6",
+      };
+
+      // --- Globals ---
+      let app, db, auth, currentUser, currentUserRole;
+      let currentView = "articles";
+      let sunEditorInstance = null;
+
+      // Data Caches
+      let articlesCache = [];
+      let authorsCache = [];
+      let usersCache = [];
+
+      // Paths
+      const appId =
+        typeof __app_id !== "undefined" ? __app_id : "default-news-app";
+      const paths = {
+        articles: `artifacts/${appId}/public/data/articles`,
+        authors: `artifacts/${appId}/public/data/authors`,
+        roles: `artifacts/${appId}/roles`,
+      };
+
+      // --- UI Controllers ---
+      function showToast(msg, isError = false) {
+        const toast = document.getElementById("toast-notification");
+        const msgEl = document.getElementById("toast-message");
+        const iconEl = document.getElementById("toast-icon");
+
+        msgEl.textContent = msg;
+        toast.classList.toggle("border-red-500", isError);
+        toast.classList.toggle("border-[#C90000]", !isError); // Default red
+
+        // Show
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      function switchView(viewName) {
+        currentView = viewName;
+
+        // Update breadcrumb
+        const breadcrumb = document.getElementById("breadcrumb-current");
+        const viewTitles = {
+          articles: "নিবন্ধসমূহ",
+          authors: "লেখকবৃন্দ",
+          users: "অ্যাক্সেস কন্ট্রোল",
+          settings: "সেটিংস",
+        };
+        if (breadcrumb)
+          breadcrumb.textContent = viewTitles[viewName] || viewName;
+
+        // Update Sidebar Active State
+        document.querySelectorAll(".sidebar-link").forEach((btn) => {
+          if (btn.dataset.view === viewName) btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+
+        // Render
+        renderContent(viewName);
+      }
+
+      function renderContent(view) {
+        const container = document.getElementById("content-view");
+        container.innerHTML =
+          '<div class="flex justify-center p-12"><div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-8 w-8"></div></div>'; // Loading state
+
+        setTimeout(() => {
+          if (view === "articles") renderArticlesView(container);
+          else if (view === "authors") renderAuthorsView(container);
+          else if (view === "users") renderUsersView(container);
+          else if (view === "settings")
+            container.innerHTML = `<div class="p-12 text-center text-gray-500 font-serif italic">সেটিংস মডিউল নির্মাণাধীন।</div>`;
+
+          lucide.createIcons();
+        }, 200);
+      }
+
+      // --- View Renderers ---
+
+      function renderArticlesView(container) {
+        const isSuperAdmin = currentUserRole === "superadmin";
+        container.innerHTML = `
+            <div class="space-y-6">
+                <!-- Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <span class="text-xs font-bold uppercase text-gray-400 tracking-widest">মোট নিবন্ধ</span>
+                        <p class="text-4xl font-display font-bold mt-2">${
+                          articlesCache.length
+                        }</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="text-xs font-bold uppercase text-gray-400 tracking-widest">প্রকাশিত</span>
+                        <p class="text-4xl font-display font-bold mt-2">${
+                          articlesCache.filter((a) => a.publishedAt).length
+                        }</p>
+                    </div>
+                     <div class="stat-card">
+                        <span class="text-xs font-bold uppercase text-gray-400 tracking-widest">খসড়া</span>
+                        <p class="text-4xl font-display font-bold mt-2">${
+                          articlesCache.filter((a) => !a.publishedAt).length
+                        }</p>
+                    </div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 border border-gray-200">
+                    <div class="relative w-full md:w-96">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                        <input type="text" id="article-search" placeholder="শিরোনাম অনুসন্ধান করুন..." class="input-field pl-10 py-2 text-sm border-gray-300" />
+                    </div>
+                    <button id="create-article-btn" class="btn-primary flex items-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i> নতুন গল্প
+                    </button>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-white border border-gray-200 overflow-hidden overflow-x-auto">
+                    <table class="w-full text-left cms-table">
+                        <thead>
+                            <tr>
+                                <th>শিরোনাম</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>বিভাগ</th>
+                                <th>লেখক</th>
+                                <th>আপডেট</th>
+                                <th class="text-right">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articles-tbody">
+                            ${
+                              articlesCache.length === 0
+                                ? '<tr><td colspan="6" class="text-center py-8 text-gray-500 italic">কোনো নিবন্ধ পাওয়া যায়নি। লেখা শুরু করুন!</td></tr>'
+                                : ""
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          `;
+
+        renderArticleRows(articlesCache);
+
+        // Event Listeners
+        document
+          .getElementById("create-article-btn")
+          .addEventListener("click", () => openArticleModal());
+        document
+          .getElementById("article-search")
+          .addEventListener("input", (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = articlesCache.filter((a) =>
+              a.title.toLowerCase().includes(term)
+            );
+            renderArticleRows(filtered);
+          });
+      }
+
+      function renderArticleRows(articles) {
+        const tbody = document.getElementById("articles-tbody");
+        if (!tbody) return;
+
+        tbody.innerHTML = articles
+          .map(
+            (a) => `
+            <tr class="group transition-colors">
+                <td class="font-bold text-gray-900 font-display text-lg">
+                    ${a.title}
+                    ${
+                      a.isBreaking
+                        ? '<span class="ml-2 text-[10px] text-red-600 font-sans uppercase tracking-widest border border-red-200 px-1">ব্রেকিং</span>'
+                        : ""
+                    }
+                </td>
+                <td>
+                    <span class="badge ${
+                      a.publishedAt ? "badge-success" : "badge-warning"
+                    }">
+                        ${a.publishedAt ? "প্রকাশিত" : "খসড়া"}
+                    </span>
+                </td>
+                <td><span class="text-xs font-bold uppercase text-gray-500 tracking-wider">${
+                  a.category
+                }</span></td>
+                <td class="text-sm text-gray-600">${
+                  a.authorName || "অজানা"
+                }</td>
+                <td class="text-xs text-gray-400 font-mono">${
+                  a.updatedAt
+                    ? new Date(a.updatedAt.seconds * 1000).toLocaleDateString(
+                        "bn-BD"
+                      )
+                    : "N/A"
+                }</td>
+                <td class="text-right space-x-2">
+                    <button class="btn-outline py-1 px-3 text-xs border-gray-300 hover:border-black edit-article-btn" data-id="${
+                      a.id
+                    }">এডিট</button>
+                    <button class="text-red-400 hover:text-red-600 p-1 delete-article-btn" data-id="${
+                      a.id
+                    }"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+            </tr>
+          `
+          )
+          .join("");
+
+        // Re-attach listeners for dynamic buttons
+        document.querySelectorAll(".edit-article-btn").forEach((b) =>
+          b.addEventListener("click", () => {
+            const art = articlesCache.find((x) => x.id === b.dataset.id);
+            openArticleModal(art);
+          })
+        );
+        document.querySelectorAll(".delete-article-btn").forEach((b) =>
+          b.addEventListener("click", () => {
+            openDeleteModal(b.dataset.id, "article");
+          })
+        );
+      }
+
+      function renderAuthorsView(container) {
+        container.innerHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- List -->
+                <div class="lg:col-span-2 space-y-4">
+                     <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold font-display">লেখক তালিকা</h2>
+                    </div>
+                    <div class="bg-white border border-gray-200">
+                        <table class="w-full text-left cms-table">
+                            <thead><tr><th>প্রোফাইল</th><th>নাম</th><th>বিবরণ</th><th class="text-right">অ্যাকশন</th></tr></thead>
+                            <tbody id="authors-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-6 border border-gray-200 shadow-sm sticky top-6">
+                        <h3 id="author-form-title" class="font-display font-bold text-xl mb-4">নতুন লেখক যোগ করুন</h3>
+                        <form id="author-form" class="space-y-4">
+                            <input type="hidden" id="author-id" />
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">পুরো নাম</label>
+                                <input type="text" id="author-name" class="input-field" required />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">বায়ো</label>
+                                <textarea id="author-bio" rows="4" class="input-field"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">অবতার ইউআরএল</label>
+                                <input type="url" id="author-image" class="input-field" placeholder="https://..." />
+                            </div>
+                            <div class="pt-2 flex gap-2">
+                                <button type="submit" class="btn-primary flex-1">সেভ প্রোফাইল</button>
+                                <button type="button" id="author-cancel" class="btn-outline hidden">বাতিল</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          `;
+
+        renderAuthorRows();
+
+        // Form Logic
+        const form = document.getElementById("author-form");
+        const cancelBtn = document.getElementById("author-cancel");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const id = document.getElementById("author-id").value;
+          const data = {
+            name: document.getElementById("author-name").value,
+            bio: document.getElementById("author-bio").value,
+            imageUrl: document.getElementById("author-image").value,
+          };
+
+          try {
+            if (id) await updateDoc(doc(db, paths.authors, id), data);
+            else await addDoc(collection(db, paths.authors), data);
+            showToast("লেখকের প্রোফাইল সংরক্ষিত হয়েছে।");
+            form.reset();
+            document.getElementById("author-id").value = "";
+            document.getElementById("author-form-title").textContent =
+              "নতুন লেখক যোগ করুন";
+            cancelBtn.classList.add("hidden");
+          } catch (err) {
+            showToast(err.message, true);
+          }
+        });
+
+        cancelBtn.addEventListener("click", () => {
+          form.reset();
+          document.getElementById("author-id").value = "";
+          document.getElementById("author-form-title").textContent =
+            "নতুন লেখক যোগ করুন";
+          cancelBtn.classList.add("hidden");
+        });
+      }
+
+      function renderAuthorRows() {
+        const tbody = document.getElementById("authors-tbody");
+        if (!tbody) return;
+
+        tbody.innerHTML = authorsCache
+          .map(
+            (a) => `
+            <tr>
+                <td class="w-16"><img src="${
+                  a.imageUrl || "https://placehold.co/40"
+                }" class="w-10 h-10 rounded-full object-cover bg-gray-100"></td>
+                <td class="font-bold">${a.name}</td>
+                <td class="text-sm text-gray-500 truncate max-w-[150px]">${
+                  a.bio || ""
+                }</td>
+                <td class="text-right space-x-1">
+                    <button class="text-blue-600 hover:text-blue-800 p-1 edit-author-btn" data-id="${
+                      a.id
+                    }"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
+                    <button class="text-red-400 hover:text-red-600 p-1 delete-author-btn" data-id="${
+                      a.id
+                    }"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+            </tr>
+          `
+          )
+          .join("");
+
+        document.querySelectorAll(".edit-author-btn").forEach((b) =>
+          b.addEventListener("click", () => {
+            const auth = authorsCache.find((x) => x.id === b.dataset.id);
+            document.getElementById("author-id").value = auth.id;
+            document.getElementById("author-name").value = auth.name;
+            document.getElementById("author-bio").value = auth.bio || "";
+            document.getElementById("author-image").value = auth.imageUrl || "";
+            document.getElementById("author-form-title").textContent =
+              "লেখক সম্পাদনা";
+            document.getElementById("author-cancel").classList.remove("hidden");
+          })
+        );
+
+        document.querySelectorAll(".delete-author-btn").forEach((b) =>
+          b.addEventListener("click", () => {
+            // Check dependency
+            const hasArticles = articlesCache.some(
+              (art) => art.authorId === b.dataset.id
+            );
+            if (hasArticles)
+              showToast("মুছে ফেলা যাবে না: লেখকের সক্রিয় নিবন্ধ আছে।", true);
+            else openDeleteModal(b.dataset.id, "author");
+          })
+        );
+      }
+
+      function renderUsersView(container) {
+        container.innerHTML = `
+             <div class="max-w-4xl mx-auto space-y-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold font-display">সিস্টেম অ্যাক্সেস কন্ট্রোল</h2>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-100 p-4 flex items-start gap-3">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-600 mt-0.5"></i>
+                    <p class="text-sm text-blue-800">ব্যবহারকারীদের প্রথমে ফায়ারবেস অথ-এর মাধ্যমে নিবন্ধন করতে হবে। এখানে আপনি তাদের সিএমএস রোল নির্ধারণ করতে পারেন। <br><strong>সুপারঅ্যাডমিন (Superadmin)</strong> এর পূর্ণ অ্যাক্সেস থাকে। <strong>রাইটার (Writer)</strong> শুধুমাত্র নিবন্ধ এডিট করতে পারেন।</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 shadow-sm">
+                    <table class="w-full text-left cms-table">
+                        <thead><tr><th>ইউজার আইডি / ইমেইল রেফারেন্স</th><th>বর্তমান রোল</th><th class="text-right">অ্যাকশন</th></tr></thead>
+                        <tbody id="users-tbody"></tbody>
+                    </table>
+                </div>
+             </div>
+          `;
+
+        const tbody = document.getElementById("users-tbody");
+
+        // In a real app, you'd list all users. Firestore roles collection usually contains UIDs.
+        // Since we can't list Auth users from client SDK easily without a cloud function,
+        // we only list roles we know about in the DB.
+        tbody.innerHTML = usersCache
+          .map(
+            (u) => `
+             <tr>
+                <td class="font-mono text-xs text-gray-600">${u.id} ${
+              u.id === currentUser.uid
+                ? '<span class="ml-2 badge badge-gray">আপনি</span>'
+                : ""
+            }</td>
+                <td>
+                    <select class="input-field py-1 text-sm w-40 role-select" data-id="${
+                      u.id
+                    }" ${u.id === currentUser.uid ? "disabled" : ""}>
+                        <option value="writer" ${
+                          u.role === "writer" ? "selected" : ""
+                        }>Writer</option>
+                        <option value="superadmin" ${
+                          u.role === "superadmin" ? "selected" : ""
+                        }>Superadmin</option>
+                    </select>
+                </td>
+                <td class="text-right">
+                    <button class="text-red-400 hover:text-red-600 user-delete-btn" data-id="${
+                      u.id
+                    }" ${
+              u.id === currentUser.uid ? "disabled" : ""
+            }>প্রত্যাহার</button>
+                </td>
+             </tr>
+          `
+          )
+          .join("");
+
+        document.querySelectorAll(".role-select").forEach((s) =>
+          s.addEventListener("change", async (e) => {
+            try {
+              await setDoc(
+                doc(db, paths.roles, e.target.dataset.id),
+                { role: e.target.value },
+                { merge: true }
+              );
+              showToast("রোল আপডেট করা হয়েছে।");
+            } catch (err) {
+              showToast(err.message, true);
+            }
+          })
+        );
+
+        document.querySelectorAll(".user-delete-btn").forEach((b) =>
+          b.addEventListener("click", () => {
+            openDeleteModal(b.dataset.id, "user");
+          })
+        );
+      }
+
+      // --- Logic: Article Modal ---
+      function openArticleModal(article = null) {
+        const modal = document.getElementById("article-modal");
+        const form = document.getElementById("article-form");
+        const titleEl = document.getElementById("modal-title");
+        const saveBtn = document.getElementById("modal-save-btn");
+
+        form.reset();
+
+        // Populate Authors
+        const authSelect = document.getElementById("article-author-select");
+        authSelect.innerHTML =
+          '<option value="">লেখক নির্বাচন করুন...</option>' +
+          authorsCache
+            .map((a) => `<option value="${a.id}">${a.name}</option>`)
+            .join("");
+
+        if (article) {
+          titleEl.textContent = "গল্প সম্পাদনা";
+          saveBtn.textContent = "আপডেট করুন";
+          document.getElementById("article-id-input").value = article.id;
+          document.getElementById("article-title").value = article.title;
+          document.getElementById("article-summary").value =
+            article.summary || "";
+          document.getElementById("article-status").value = article.publishedAt
+            ? "Published"
+            : "Draft";
+          document.getElementById("article-category").value =
+            article.category || "World";
+          document.getElementById("article-author-select").value =
+            article.authorId || "";
+          document.getElementById("article-image-url").value =
+            article.imageUrl || "";
+
+          document.getElementById("article-isHero").checked =
+            article.isHero || false;
+          document.getElementById("article-isTopStory").checked =
+            article.isTopStory || false;
+          document.getElementById("article-isBreaking").checked =
+            article.isBreaking || false;
+
+          sunEditorInstance.setContents(article.body || "");
+        } else {
+          titleEl.textContent = "নতুন গল্প লিখুন";
+          saveBtn.textContent = "প্রকাশ করুন";
+          document.getElementById("article-id-input").value = "";
+          sunEditorInstance.setContents("");
+        }
+
+        modal.showModal();
+
+        // Save Logic
+        saveBtn.onclick = async () => {
+          const id = document.getElementById("article-id-input").value;
+          const status = document.getElementById("article-status").value;
+          const authorId = document.getElementById("article-author-select")
+            .value;
+
+          if (!document.getElementById("article-title").value) {
+            showToast("শিরোনাম প্রয়োজন", true);
+            return;
+          }
+          if (!authorId) {
+            showToast("লেখক প্রয়োজন", true);
+            return;
+          }
+
+          const authorName =
+            authorsCache.find((a) => a.id === authorId)?.name || "Staff";
+
+          const data = {
+            title: document.getElementById("article-title").value,
+            summary: document.getElementById("article-summary").value,
+            category: document.getElementById("article-category").value,
+            imageUrl: document.getElementById("article-image-url").value,
+            body: sunEditorInstance.getContents(),
+            isHero: document.getElementById("article-isHero").checked,
+            isTopStory: document.getElementById("article-isTopStory").checked,
+            isBreaking: document.getElementById("article-isBreaking").checked,
+            authorId,
+            authorName,
+            updatedAt: serverTimestamp(),
+          };
+
+          // Publishing Logic
+          if (status === "Published" && (!article || !article.publishedAt)) {
+            data.publishedAt = serverTimestamp();
+          } else if (status === "Draft") {
+            data.publishedAt = null;
+          }
+
+          try {
+            saveBtn.textContent = "সংরক্ষণ করা হচ্ছে...";
+            if (id) await updateDoc(doc(db, paths.articles, id), data);
+            else await addDoc(collection(db, paths.articles), data);
+
+            showToast("গল্প সফলভাবে সংরক্ষিত হয়েছে।");
+            modal.close();
+          } catch (err) {
+            showToast(err.message, true);
+            saveBtn.textContent = "আবার চেষ্টা করুন";
+          }
+        };
+
+        document.getElementById("modal-cancel-btn").onclick = () =>
+          modal.close();
+      }
+
+      // --- Logic: Delete Modal ---
+      function openDeleteModal(id, type) {
+        const modal = document.getElementById("delete-confirm-modal");
+        const confirmBtn = document.getElementById("delete-confirm-btn");
+        document.getElementById("delete-confirm-id").value = id;
+
+        modal.showModal();
+
+        confirmBtn.onclick = async () => {
+          try {
+            if (type === "article")
+              await deleteDoc(doc(db, paths.articles, id));
+            if (type === "author") await deleteDoc(doc(db, paths.authors, id));
+            if (type === "user") await deleteDoc(doc(db, paths.roles, id));
+            showToast("সফলভাবে মুছে ফেলা হয়েছে।");
+            modal.close();
+          } catch (err) {
+            showToast(err.message, true);
+          }
+        };
+
+        document.getElementById("delete-cancel-btn").onclick = () =>
+          modal.close();
+      }
+
+      // --- Initialization Flow ---
+      async function init() {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        // Setup Editor
+        sunEditorInstance = SUNEDITOR.create("article-body", {
+          buttonList: [
+            ["undo", "redo"],
+            ["font", "fontSize", "formatBlock"],
+            ["bold", "underline", "italic", "strike"],
+            ["fontColor", "hiliteColor"],
+            ["removeFormat"],
+            ["align", "list", "lineHeight"],
+            ["table", "link", "image", "video"],
+            ["fullScreen", "showBlocks", "codeView"],
+          ],
+          width: "100%",
+          height: "400px",
+          placeholder: "আপনার গল্প এখানে লিখুন...",
+        });
+
+        // Auth Listener
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            currentUser = user;
+            // Check Role
+            try {
+              document
+                .getElementById("loading-container")
+                .classList.remove("hidden");
+              document.getElementById("auth-container").classList.add("hidden");
+
+              const roleSnap = await getDoc(doc(db, paths.roles, user.uid));
+              if (roleSnap.exists()) {
+                currentUserRole = roleSnap.data().role;
+                document.getElementById("user-email-display").textContent =
+                  user.email;
+
+                // Load Data
+                startListeners();
+
+                document
+                  .getElementById("loading-container")
+                  .classList.add("hidden");
+                document
+                  .getElementById("admin-dashboard")
+                  .classList.remove("hidden");
+
+                // Default View
+                switchView("articles");
+              } else {
+                // No role
+                signOut(auth);
+                alert("প্রবেশাধিকার নিষিদ্ধ: কোনো রোল নির্ধারিত নেই।");
+                window.location.reload();
+              }
+            } catch (e) {
+              console.error(e);
+            }
+          } else {
+            document
+              .getElementById("auth-container")
+              .classList.remove("hidden");
+            document.getElementById("admin-dashboard").classList.add("hidden");
+          }
+        });
+
+        // Mobile Menu
+        document.getElementById("mobile-menu-toggle").onclick = () => {
+          const sidebar = document.querySelector("aside");
+          sidebar.classList.toggle("hidden");
+          sidebar.classList.toggle("flex");
+          sidebar.classList.toggle("absolute");
+          sidebar.classList.toggle("h-full");
+          sidebar.classList.toggle("w-64");
+        };
+      }
+
+      function startListeners() {
+        // Articles
+        onSnapshot(query(collection(db, paths.articles)), (snap) => {
+          articlesCache = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          // Sort by date desc
+          articlesCache.sort(
+            (a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0)
+          );
+          if (currentView === "articles")
+            renderArticlesView(document.getElementById("content-view"));
+        });
+
+        // Authors
+        onSnapshot(collection(db, paths.authors), (snap) => {
+          authorsCache = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          if (currentView === "authors")
+            renderAuthorsView(document.getElementById("content-view"));
+        });
+
+        // Roles (Users)
+        if (currentUserRole === "superadmin") {
+          onSnapshot(collection(db, paths.roles), (snap) => {
+            usersCache = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+            if (currentView === "users")
+              renderUsersView(document.getElementById("content-view"));
+          });
+        }
+
+        // Navigation Events
+        document.querySelectorAll(".sidebar-link").forEach((btn) => {
+          btn.addEventListener("click", () => switchView(btn.dataset.view));
+        });
+
+        // Logout
+        document
+          .getElementById("logout-button")
+          .addEventListener("click", () => signOut(auth));
+      }
+
+      // Login Handler
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value;
+          const pass = document.getElementById("login-password").value;
+          const errEl = document.getElementById("login-error");
+
+          try {
+            errEl.textContent = "";
+            await signInWithEmailAndPassword(auth, email, pass);
+          } catch (err) {
+            errEl.textContent = "যাচাইকরণ ব্যর্থ: " + err.message;
+          }
+        });
+
+      // Start
+      init();
+    </script>
+  </body>
+</html>
