@@ -612,7 +612,7 @@
             <img
               id="author-bio-image"
               src=""
-              class="w-20 h-20 object-cover ring-4 ring-gray-50 relative z-10"
+              class="w-20 h-20 object-cover ring-4 ring-gray-50 rounded-full relative z-10"
               alt="Author"
             />
             <div class="text-center sm:text-left relative z-10">
@@ -1015,7 +1015,19 @@
         return minutes;
       }
 
-      function deriveAuthorRole(bio) {
+      function deriveAuthorRole(name, bio) {
+        const specialNames = [
+          "Shadik Hossain",
+          "Shadik Hossain Shakib",
+          "Shadik Hosein",
+          "সাদিক হোসেন",
+          "সাদিক হোসাইন",
+          "সাদিক",
+        ];
+        if (name && specialNames.includes(name)) {
+          return "সম্পাদক ও প্রতিষ্ঠাতা";
+        }
+
         if (!bio) return "নিজস্ব প্রতিবেদক";
         const keywords = [
           "সম্পাদক",
@@ -1122,7 +1134,7 @@
             if (data.imageUrl) authorBioImage.src = data.imageUrl;
 
             // Derive Role/Title Dynamically
-            articleAuthorRole.innerText = deriveAuthorRole(data.bio);
+            articleAuthorRole.innerText = deriveAuthorRole(data.name, data.bio);
 
             return data;
           }
