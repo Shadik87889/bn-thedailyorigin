@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,8 +45,42 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                black: "#111111",
+                red: "#E90606",
+                cream: "#fcfbf9",
+              },
+            },
+            fontFamily: {
+              sans: ["Hind Siliguri", "sans-serif"],
+              serif: ["Noto Serif Bengali", "serif"],
+              display: ["Noto Serif Bengali", "serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 1s ease-out forwards",
+              "slide-up": "slideUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
 
-    <!-- Google Fonts: Hind Siliguri (UI), Noto Serif Bengali (Headlines/Reading) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,156 +91,104 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Professional Styles (Unified with Index) -->
+    <!-- Professional Styles -->
     <style>
-      :root {
-        --font-sans: "Hind Siliguri", sans-serif;
-        --font-serif: "Noto Serif Bengali", serif;
-        --font-display: "Noto Serif Bengali", serif;
-        --color-brand: #000000;
-        --color-accent: #c90000;
-        --color-bg: #ffffff;
+      /* FORCE NO BORDER RADIUS */
+      /* * {
+        border-radius: 0 !important;
+      } */
+
+      /* Smooth Scroll & Selection */
+      ::selection {
+        background-color: #e90606;
+        color: white;
       }
 
-      body {
-        font-family: var(--font-serif);
-        background-color: var(--color-bg);
-        color: #111;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-        border-top: 5px solid var(--color-accent);
+      /* Progress Bar */
+      #progress-bar {
+        width: 0%;
+        transition: width 0.1s linear;
       }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: var(--font-display);
-        letter-spacing: 0;
-      }
-
-      .font-sans {
-        font-family: var(--font-sans);
-      }
-      .font-serif {
-        font-family: var(--font-serif);
-      }
-      .font-display {
-        font-family: var(--font-display);
-      }
-
-      /* Navigation */
-      .masthead {
-        border-bottom: 1px solid #111;
-      }
-      .nav-strip {
-        border-top: 1px solid #111;
-        border-bottom: 1px solid #111;
-      }
-      .nav-link {
-        position: relative;
-        color: #111;
-        font-family: var(--font-sans);
-        font-weight: 700;
-        font-size: 0.9rem; /* Increased for Bangla */
-        text-transform: uppercase;
-        letter-spacing: 0;
-        padding: 0.5rem 0;
-        transition: color 0.2s ease;
-      }
-      .nav-link:hover {
-        color: var(--color-accent);
-      }
-
-      /* Article Body Typography */
+      /* Article Typography Refined */
       .article-body p {
-        font-size: 1.15rem; /* Slightly larger for Bangla readability */
-        line-height: 1.9;
-        margin-bottom: 1.5rem;
-        color: #222;
+        font-family: "Noto Serif Bengali", serif;
+        font-size: 1.25rem;
+        line-height: 2;
+        margin-bottom: 2rem;
+        color: #1f2937;
+      }
+      .article-body p:first-of-type::first-letter {
+        float: left;
+        font-size: 4.5rem;
+        line-height: 1;
+        font-weight: 700;
+        margin-right: 1rem;
+        margin-top: 0.25rem;
+        color: #111;
       }
       .article-body h2 {
+        font-family: "Hind Siliguri", sans-serif;
         font-size: 2rem;
         font-weight: 700;
-        margin-top: 3rem;
-        margin-bottom: 1.25rem;
-        color: #000;
+        margin-top: 3.5rem;
+        margin-bottom: 1.5rem;
+        color: #111;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
       }
       .article-body h3 {
+        font-family: "Hind Siliguri", sans-serif;
         font-size: 1.5rem;
-        font-weight: 700;
+        font-weight: 600;
         margin-top: 2.5rem;
         margin-bottom: 1rem;
+        color: #333;
       }
       .article-body blockquote {
-        border-left: 4px solid var(--color-accent);
-        padding-left: 1.5rem;
-        margin: 2.5rem 0;
-        font-family: var(--font-display);
+        position: relative;
+        margin: 3rem 0;
+        padding: 2rem;
+        background-color: #f9fafb;
+        border-left: 4px solid #e90606;
+      }
+      .article-body blockquote p {
+        font-family: "Noto Serif Bengali", serif;
         font-size: 1.5rem;
         font-style: italic;
-        color: #444;
-        background-color: #fafafa;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        color: #111;
+        margin-bottom: 0;
+        line-height: 1.6;
       }
-      .article-body a {
-        color: var(--color-accent);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
-      .article-body ul,
-      .article-body ol {
-        margin-bottom: 1.5rem;
-        padding-left: 2rem;
-      }
-      .article-body ul {
-        list-style-type: disc;
-      }
-      .article-body ol {
-        list-style-type: decimal;
+      .article-body blockquote::before {
+        content: '"';
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        font-size: 4rem;
+        color: rgba(233, 6, 6, 0.1);
+        font-family: serif;
       }
 
-      /* Utilities */
-      .section-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
-        border-top: 1px solid #111;
-        padding-top: 0.75rem;
-      }
-      .section-title {
-        font-family: var(--font-sans);
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--color-accent);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      /* Ticker */
+      /* Ticker Animation */
       .ticker-wrap {
         width: 100%;
         overflow: hidden;
-        background-color: #000;
-        color: white;
+        white-space: nowrap;
       }
       .ticker-move {
-        display: flex;
-        width: fit-content;
-        animation: ticker 45s linear infinite;
+        display: inline-flex;
+        animation: ticker 30s linear infinite;
+      }
+      .ticker-move:hover {
+        animation-play-state: paused;
       }
       .ticker-content {
         display: flex;
         align-items: center;
         flex-shrink: 0;
       }
-      .ticker-move:hover {
-        animation-play-state: paused;
-      }
+
       @keyframes ticker {
         0% {
           transform: translateX(0);
@@ -215,154 +197,180 @@
           transform: translateX(-50%);
         }
       }
-
-      /* Modals */
-      .modal-enter {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      .modal-enter-active {
-        opacity: 1;
-        transform: translateY(0);
-        transition: all 0.3s ease;
-      }
     </style>
   </head>
-  <body class="bg-white selection:bg-[#E90606] selection:text-white">
+  <body class="bg-brand-cream text-gray-900 overflow-x-hidden">
+    <!-- Reading Progress Bar -->
+    <div
+      class="fixed top-0 left-0 h-1 bg-brand-red z-[100]"
+      id="progress-bar"
+    ></div>
+
     <!-- Loading Overlay -->
     <div
       id="loading-overlay"
-      class="fixed inset-0 z-[60] bg-white flex flex-col justify-center items-center"
+      class="fixed inset-0 z-[110] bg-brand-cream flex flex-col justify-center items-center transition-opacity duration-500"
     >
-      <div class="flex flex-col items-center animate-pulse">
+      <div class="flex flex-col items-center">
+        <div
+          class="w-16 h-16 border-4 border-gray-200 border-t-brand-red animate-spin mb-6"
+        ></div>
         <span
-          class="font-display font-black text-5xl tracking-tighter text-black"
+          class="font-display font-bold text-3xl tracking-tight text-black animate-pulse"
           >দ্য ডেইলি অরিজিন</span
         >
-        <div class="h-1 w-16 bg-[#E90606] mt-4"></div>
         <p
           id="loading-text"
-          class="mt-4 font-sans text-xs uppercase tracking-widest text-gray-400 font-bold"
+          class="mt-2 font-sans text-xs uppercase tracking-widest text-gray-400 font-bold"
         >
-          আর্টিকেল লোড হচ্ছে...
+          লোড হচ্ছে...
         </p>
       </div>
     </div>
 
-    <!-- Top Bar -->
+    <!-- Top Utility Bar (Black) -->
     <div class="bg-black text-white text-xs py-2 relative z-50">
       <div
         class="container mx-auto px-4 lg:px-8 flex items-center justify-between"
       >
-        <!-- Ticker placeholder -->
-        <div class="flex items-center overflow-hidden w-full lg:w-3/4">
+        <!-- Ticker -->
+        <div class="flex items-center overflow-hidden w-full lg:w-2/3">
           <span
-            class="text-[#E90606] font-bold uppercase tracking-widest mr-4 flex-shrink-0 text-[10px] font-sans"
-            >জনপ্রিয়</span
+            class="bg-brand-red text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest mr-4 flex-shrink-0"
+            >সদ্যপ্রাপ্ত</span
           >
           <div class="ticker-wrap flex-1">
             <div class="ticker-move">
+              <!-- Original -->
               <div class="ticker-content">
                 <span
-                  class="mx-4 text-gray-400 font-sans uppercase tracking-widest font-bold"
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
                   >টেক আর্নিংয়ে বিশ্ব বাজারের উত্থান</span
                 >
-                <span class="text-[#E90606] mx-2">///</span>
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
                 <span
-                  class="mx-4 text-gray-400 font-sans uppercase tracking-widest font-bold"
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
                   >জেনেভায় নতুন জলবায়ু চুক্তি স্বাক্ষরিত</span
                 >
-                <span class="text-[#E90606] mx-2">///</span>
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
                 <span
-                  class="mx-4 text-gray-400 font-sans uppercase tracking-widest font-bold"
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
                   >সিনেটে শিক্ষা সংস্কার বিল পাস</span
                 >
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
+              </div>
+              <!-- Duplicate for seamless loop -->
+              <div class="ticker-content">
+                <span
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
+                  >টেক আর্নিংয়ে বিশ্ব বাজারের উত্থান</span
+                >
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
+                <span
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
+                  >জেনেভায় নতুন জলবায়ু চুক্তি স্বাক্ষরিত</span
+                >
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
+                <span
+                  class="mx-4 text-gray-300 font-sans cursor-pointer hover:text-white transition"
+                  >সিনেটে শিক্ষা সংস্কার বিল পাস</span
+                >
+                <span class="text-brand-red mx-2 text-[10px]">●</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Auth / Actions -->
+        <!-- Auth / Socials -->
         <div
-          class="hidden lg:flex items-center space-x-6 ml-6 font-sans text-[11px] font-bold uppercase tracking-widest"
+          class="hidden lg:flex items-center space-x-6 font-sans text-[11px] font-bold uppercase tracking-widest"
         >
-          <button
-            id="nav-subscribe-btn"
-            class="text-white hover:text-[#E90606] transition-colors"
+          <div
+            class="flex items-center gap-4 border-r border-gray-800 pr-6 mr-2"
           >
-            সাবস্ক্রাইব
-          </button>
-          <div class="h-3 w-px bg-gray-700"></div>
+            <i
+              data-lucide="facebook"
+              class="w-3 h-3 text-gray-400 hover:text-white cursor-pointer"
+            ></i>
+            <i
+              data-lucide="twitter"
+              class="w-3 h-3 text-gray-400 hover:text-white cursor-pointer"
+            ></i>
+            <i
+              data-lucide="instagram"
+              class="w-3 h-3 text-gray-400 hover:text-white cursor-pointer"
+            ></i>
+          </div>
           <button
             id="nav-signin-btn"
-            class="text-white hover:text-[#E90606] transition-colors"
+            class="flex items-center gap-2 text-white hover:text-brand-red transition-colors"
           >
-            লগ ইন
+            <i data-lucide="user" class="w-3 h-3"></i> লগ ইন
           </button>
-          <div
-            id="user-profile-display"
-            class="hidden flex items-center space-x-2 cursor-pointer"
-          >
-            <span
-              class="w-6 h-6 rounded-full bg-[#E90606] flex items-center justify-center text-[10px]"
-              >DJ</span
-            >
-            <span>অ্যাকাউন্ট</span>
-          </div>
         </div>
       </div>
     </div>
 
     <!-- Navigation Header -->
     <header
-      class="masthead bg-white sticky top-0 z-40 w-full transition-shadow duration-300 border-b border-black md:border-none shadow-sm md:shadow-none"
+      class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300"
       id="main-header"
     >
-      <div class="container mx-auto px-4 lg:px-8 py-3 md:pt-6 md:pb-4">
-        <!-- Logo Row -->
-        <div class="flex justify-between items-center md:mb-6">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Mobile Menu Trigger -->
           <button
             id="mobile-menu-btn"
-            class="lg:hidden text-black hover:text-[#E90606] transition-colors -ml-1"
+            class="lg:hidden p-2 text-black hover:bg-gray-100 transition-colors"
           >
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
 
-          <!-- Masthead Logo -->
-          <a href="./home" class="flex-1 flex justify-center group px-2">
-            <div class="flex flex-col items-center">
-              <h1
-                class="font-display font-bold text-2xl sm:text-3xl md:text-6xl lg:text-7xl text-black tracking-tight leading-none group-hover:scale-[1.01] transition-transform duration-300 text-center"
-              >
-                দ্য ডেইলি অরিজিন
-              </h1>
-              <span
-                class="hidden md:block font-sans text-[10px] uppercase tracking-[0.2em] text-gray-500 mt-2 font-bold"
-                >নিরপেক্ষ • নির্ভীক • আপোষহীন</span
-              >
-            </div>
+          <!-- Logo -->
+          <a href="./home" class="flex flex-col items-center group">
+            <h1
+              class="font-display font-bold text-3xl md:text-4xl text-black tracking-tight group-hover:opacity-80 transition-opacity"
+            >
+              দ্য ডেইলি অরিজিন
+            </h1>
           </a>
 
+          <!-- Desktop Nav Links -->
+          <nav class="hidden lg:flex items-center space-x-8">
+            <a
+              href="./category?category=Politics"
+              class="nav-link font-sans font-bold text-sm hover:text-brand-red transition-colors"
+              >রাজনীতি</a
+            >
+            <a
+              href="./category?category=World"
+              class="nav-link font-sans font-bold text-sm hover:text-brand-red transition-colors"
+              >বিশ্ব</a
+            >
+            <a
+              href="./category?category=Business"
+              class="nav-link font-sans font-bold text-sm hover:text-brand-red transition-colors"
+              >বাণিজ্য</a
+            >
+            <a
+              href="./category?category=Tech"
+              class="nav-link font-sans font-bold text-sm hover:text-brand-red transition-colors"
+              >প্রযুক্তি</a
+            >
+            <a
+              href="./category?category=Sports"
+              class="nav-link font-sans font-bold text-sm hover:text-brand-red transition-colors"
+              >খেলাধুলা</a
+            >
+          </nav>
+
+          <!-- Search Trigger -->
           <button
             id="search-open-btn"
-            class="text-black hover:text-[#E90606] transition-colors -mr-1"
+            class="p-2 text-gray-500 hover:text-brand-red transition-colors"
           >
             <i data-lucide="search" class="w-5 h-5"></i>
           </button>
-        </div>
-
-        <!-- Desktop Navigation Strip -->
-        <div class="hidden lg:block nav-strip py-3">
-          <nav class="flex justify-center items-center space-x-10">
-            <a href="./category?category=World" class="nav-link">বিশ্ব</a>
-            <a href="./category?category=Tech" class="nav-link">প্রযুক্তি</a>
-            <a href="./category?category=Politics" class="nav-link">রাজনীতি</a>
-            <a href="./category?category=Business" class="nav-link">বাণিজ্য</a>
-            <a href="./category?category=Health" class="nav-link">স্বাস্থ্য</a>
-            <a href="./category?category=Science" class="nav-link">বিজ্ঞান</a>
-            <a href="./category?category=Sports" class="nav-link">খেলাধুলা</a>
-            <a href="./category?category=Others" class="nav-link">অন্যান্য</a>
-          </nav>
         </div>
       </div>
     </header>
@@ -370,165 +378,257 @@
     <!-- Mobile Menu Drawer -->
     <div
       id="mobile-menu-overlay"
-      class="fixed inset-0 bg-black/50 z-40 hidden backdrop-blur-sm opacity-0 transition-opacity duration-300"
+      class="fixed inset-0 bg-black/60 z-40 hidden backdrop-blur-sm opacity-0 transition-opacity duration-300"
     ></div>
     <div
       id="mobile-menu"
-      class="fixed top-0 left-0 h-full w-[280px] bg-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-r-4 border-[#E90606]"
+      class="fixed top-0 left-0 h-full w-[85%] max-w-[300px] bg-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col"
     >
       <div
         class="p-6 border-b border-gray-100 flex justify-between items-center bg-black text-white"
       >
-        <span class="font-sans font-bold text-lg uppercase tracking-wider"
-          >বিভাগসমূহ</span
-        >
-        <button
-          id="mobile-menu-close-btn"
-          class="text-white hover:text-gray-300"
-        >
-          <i data-lucide="x" class="w-6 h-6"></i>
+        <span class="font-sans font-bold text-lg">মেনু</span>
+        <button id="mobile-menu-close-btn" class="p-1 hover:bg-gray-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <nav class="flex-grow overflow-y-auto py-6 px-4 space-y-2">
+      <nav class="flex-grow overflow-y-auto py-6 px-6 space-y-4">
         <a
           href="./category?category=World"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          class="block font-display text-xl font-bold text-gray-800 hover:text-brand-red"
           >বিশ্ব</a
         >
         <a
-          href="./category?category=Tech"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >প্রযুক্তি</a
-        >
-        <a
           href="./category?category=Politics"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          class="block font-display text-xl font-bold text-gray-800 hover:text-brand-red"
           >রাজনীতি</a
         >
         <a
-          href="./category?category=Culture"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >সংস্কৃতি</a
+          href="./category?category=Business"
+          class="block font-display text-xl font-bold text-gray-800 hover:text-brand-red"
+          >বাণিজ্য</a
         >
         <a
-          href="./category?category=Science"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >বিজ্ঞান</a
+          href="./category?category=Tech"
+          class="block font-display text-xl font-bold text-gray-800 hover:text-brand-red"
+          >প্রযুক্তি</a
         >
         <a
           href="./category?category=Sports"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          class="block font-display text-xl font-bold text-gray-800 hover:text-brand-red"
           >খেলাধুলা</a
         >
       </nav>
     </div>
 
-    <!-- Main Content Area -->
-    <main class="container mx-auto px-4 lg:px-8 py-10 md:py-16 min-h-screen">
-      <!-- Error Message -->
-      <div id="article-error" class="hidden text-center py-20">
-        <h2 class="font-display text-4xl font-bold mb-4">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 lg:px-8 py-10 min-h-screen">
+      <!-- Error State -->
+      <div id="article-error" class="hidden text-center py-32 animate-fade-in">
+        <div class="inline-block p-6 bg-red-50 mb-6">
+          <i data-lucide="alert-circle" class="w-12 h-12 text-brand-red"></i>
+        </div>
+        <h2 class="font-display text-3xl font-bold mb-3 text-gray-900">
           আর্টিকেল পাওয়া যায়নি
         </h2>
-        <p class="font-serif text-gray-500 mb-8">
-          এই কন্টেন্টটি হয়তো সরানো হয়েছে বা মুছে ফেলা হয়েছে।
+        <p class="font-sans text-gray-500 mb-8 max-w-md mx-auto">
+          এই কন্টেন্টটি হয়তো সরানো হয়েছে বা মুছে ফেলা হয়েছে। অনুগ্রহ করে
+          নীড়পাতায় ফিরে যান।
         </p>
         <a
           href="./home"
-          class="inline-block bg-black text-white px-8 py-3 font-sans font-bold uppercase tracking-widest hover:bg-[#E90606] transition-colors"
-          >নীড়পাতায় ফিরে যান</a
+          class="inline-flex items-center gap-2 bg-black text-white px-8 py-3 font-sans font-bold hover:bg-brand-red transition-colors shadow-lg"
         >
+          নীড়পাতায় ফিরে যান <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
       </div>
 
       <!-- Article Layout -->
       <article
         id="main-article-container"
-        class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16"
+        class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 opacity-0 animate-slide-up"
       >
-        <!-- Left Column: Content (Span 8) -->
-        <div class="lg:col-span-8">
-          <!-- Article Header -->
-          <header class="mb-8">
+        <!-- Left Sidebar (Share) - Desktop Only -->
+        <div class="hidden lg:block lg:col-span-1">
+          <div class="sticky top-32 flex flex-col gap-4 items-center">
+            <button
+              class="p-3 bg-white border border-gray-200 text-gray-500 hover:text-blue-600 hover:border-blue-600 hover:shadow-md transition-all group"
+              title="ফেসবুক"
+            >
+              <i
+                data-lucide="facebook"
+                class="w-5 h-5 transform group-hover:scale-110 transition-transform"
+              ></i>
+            </button>
+            <button
+              class="p-3 bg-white border border-gray-200 text-gray-500 hover:text-blue-400 hover:border-blue-400 hover:shadow-md transition-all group"
+              title="টুইটার"
+            >
+              <i
+                data-lucide="twitter"
+                class="w-5 h-5 transform group-hover:scale-110 transition-transform"
+              ></i>
+            </button>
+            <button
+              class="p-3 bg-white border border-gray-200 text-gray-500 hover:text-green-600 hover:border-green-600 hover:shadow-md transition-all group"
+              title="লিঙ্ক কপি করুন"
+            >
+              <i
+                data-lucide="link"
+                class="w-5 h-5 transform group-hover:scale-110 transition-transform"
+              ></i>
+            </button>
+            <div class="h-px w-6 bg-gray-200 my-2"></div>
+            <button
+              class="p-3 bg-white border border-gray-200 text-gray-500 hover:text-brand-red hover:border-brand-red hover:shadow-md transition-all group"
+              title="সেভ করুন"
+            >
+              <i
+                data-lucide="bookmark"
+                class="w-5 h-5 transform group-hover:scale-110 transition-transform"
+              ></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Content Column -->
+        <div class="lg:col-span-7">
+          <!-- Header -->
+          <header class="mb-10 text-center lg:text-left">
             <a
               href="#"
               id="article-category-link"
-              class="text-[#E90606] font-bold uppercase tracking-widest text-xs font-sans mb-4 block hover:underline"
+              class="inline-block px-3 py-1 mb-6 bg-red-50 text-brand-red font-bold text-xs font-sans tracking-wider border border-red-100 hover:bg-brand-red hover:text-white transition-colors"
             >
               বিভাগ লোড হচ্ছে...
             </a>
             <h1
               id="article-title"
-              class="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-black leading-[1.1] mb-6"
+              class="font-display font-bold text-3xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-8"
             >
               শিরোনাম লোড হচ্ছে...
             </h1>
 
-            <!-- Metadata Row -->
+            <!-- Author & Date -->
             <div
-              class="flex items-center justify-between border-y border-gray-100 py-4 mb-8 font-sans text-xs font-bold uppercase tracking-widest text-gray-500"
+              class="flex flex-wrap items-center justify-evenly lg:justify-start gap-6 border-y border-gray-200 py-6"
             >
-              <div class="flex items-center space-x-2">
-                <span class="text-black">লিখেছেন</span>
-                <span id="article-author" class="text-[#E90606]"
-                  >দ্য ডেইলি অরিজিন ডেস্ক</span
-                >
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-200 rounded-full overflow-hidden">
+                  <img
+                    src="the_daily_origin_favicon.png"
+                    class="w-full h-full object-cover"
+                    alt="Author"
+                  />
+                </div>
+                <div class="text-left">
+                  <div
+                    id="article-author-role"
+                    class="font-sans font-bold text-sm text-gray-900"
+                  >
+                    ডেস্ক রিপোর্ট
+                  </div>
+                  <div
+                    id="article-author"
+                    class="font-sans text-xs text-brand-red font-bold uppercase"
+                  >
+                    দ্য ডেইলি অরিজিন
+                  </div>
+                </div>
               </div>
-              <span id="article-date">তারিখ লোড হচ্ছে...</span>
+              <div class="hidden sm:block w-px h-8 bg-gray-200"></div>
+              <div class="text-left">
+                <div
+                  id="article-date"
+                  class="font-sans font-bold text-sm text-gray-900"
+                >
+                  ...
+                </div>
+                <div
+                  id="article-read-time"
+                  class="font-sans text-xs text-gray-500"
+                >
+                  পড়তে ৫ মিনিট লাগবে
+                </div>
+              </div>
             </div>
           </header>
 
           <!-- Hero Image -->
-          <figure class="mb-10 relative">
+          <figure class="mb-12 relative group overflow-hidden shadow-xl">
             <img
               id="article-image"
               src="https://placehold.co/1200x700/f3f4f6/9ca3af?text=Loading..."
               alt="Article Hero"
-              class="w-full h-auto object-cover grayscale-[20%]"
+              class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
             />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"
+            ></div>
             <figcaption
               id="article-image-caption"
-              class="mt-3 text-xs text-gray-400 font-sans uppercase tracking-wider text-right"
+              class="absolute bottom-4 left-4 right-4 text-center md:text-left text-white/90 text-sm font-sans font-medium tracking-wide"
             >
               সূত্র: দ্য ডেইলি অরিজিন
             </figcaption>
           </figure>
 
-          <!-- Article Body -->
-          <div
-            id="article-content-body"
-            class="article-body font-serif text-lg leading-loose text-gray-900"
-          >
-            <!-- Content injected here -->
-            <p class="text-xl font-medium text-gray-500 italic">
-              সম্পূর্ণ খবর লোড হচ্ছে...
-            </p>
+          <!-- Body -->
+          <div id="article-content-body" class="article-body">
+            <!-- Dynamic Content -->
+            <div class="space-y-4 animate-pulse">
+              <div class="h-4 bg-gray-200 w-full"></div>
+              <div class="h-4 bg-gray-200 w-5/6"></div>
+              <div class="h-4 bg-gray-200 w-full"></div>
+            </div>
           </div>
 
-          <!-- Author Bio Box -->
+          <!-- Tags -->
+          <div class="mt-12 pt-8 border-t border-gray-200">
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 hover:bg-gray-200 cursor-pointer transition"
+                >#বাংলাদেশ</span
+              >
+              <span
+                class="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 hover:bg-gray-200 cursor-pointer transition"
+                >#সংবাদ</span
+              >
+              <span
+                class="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 hover:bg-gray-200 cursor-pointer transition"
+                >#ব্রেকিং</span
+              >
+            </div>
+          </div>
+
+          <!-- Author Bio (Dynamic) -->
           <div
             id="author-bio-box"
-            class="hidden mt-16 p-8 bg-gray-50 border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6"
+            class="hidden mt-16 p-8 bg-white border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6 relative overflow-hidden"
           >
+            <div class="absolute top-0 right-0 p-4 opacity-5">
+              <i data-lucide="feather" class="w-24 h-24"></i>
+            </div>
             <img
               id="author-bio-image"
               src=""
-              class="w-20 h-20 rounded-full object-cover grayscale border border-gray-200"
+              class="w-20 h-20 object-cover ring-4 ring-gray-50 relative z-10"
               alt="Author"
             />
-            <div>
+            <div class="text-center sm:text-left relative z-10">
               <span
-                class="block text-[10px] font-sans font-bold uppercase tracking-widest text-gray-400 mb-2"
-                >লেখকের কথা</span
+                class="block text-xs font-sans font-bold uppercase tracking-widest text-brand-red mb-2"
+                >এই নিবন্ধের লেখক</span
               >
               <h3
                 id="author-bio-name"
-                class="font-display font-bold text-xl text-black mb-2"
+                class="font-display font-bold text-2xl text-gray-900 mb-2"
               >
                 লেখকের নাম
               </h3>
               <p
                 id="author-bio-text"
-                class="font-serif text-sm text-gray-600 leading-relaxed"
+                class="font-serif text-gray-600 leading-relaxed"
               >
                 লেখকের বায়ো এখানে থাকবে।
               </p>
@@ -536,121 +636,133 @@
           </div>
         </div>
 
-        <!-- Right Column: Sidebar (Span 4) -->
-        <aside
-          class="lg:col-span-4 space-y-16 pl-0 lg:pl-10 lg:border-l lg:border-gray-200"
-        >
-          <!-- Newsletter Widget (Reused) -->
-          <div class="bg-[#E90606] text-white p-8 relative overflow-hidden">
+        <!-- Right Sidebar (Span 4) -->
+        <aside class="lg:col-span-4 space-y-12 pl-0 lg:pl-8">
+          <!-- Newsletter (NO STICKY) -->
+          <div
+            class="bg-black text-white p-8 relative overflow-hidden shadow-2xl group"
+          >
             <div
-              class="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"
+              class="absolute inset-0 bg-brand-red opacity-0 group-hover:opacity-10 transition-opacity duration-500"
             ></div>
-            <span
-              class="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] mb-3 text-white/80"
-              >নিউজলেটার</span
-            >
-            <h3 class="font-display text-3xl font-bold mb-4 leading-none">
-              দ্য ডেইলি<br />অরিজিন
-            </h3>
-            <p class="mb-6 font-serif text-sm text-white/90 leading-relaxed">
-              প্রতিদিন সকালে আপনার ইনবক্সে প্রয়োজনীয় অন্তর্দৃষ্টি।
-            </p>
-            <button
-              class="w-full bg-black hover:bg-gray-900 text-white font-sans font-bold uppercase text-xs tracking-[0.2em] py-4 transition-colors"
-            >
-              সাইন আপ করুন
-            </button>
+            <div class="relative z-10">
+              <span
+                class="inline-block px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest mb-4"
+                >নিউজলেটার</span
+              >
+              <h3 class="font-display text-2xl font-bold mb-3">
+                সবার আগে সব খবর
+              </h3>
+              <p class="font-sans text-gray-400 text-sm mb-6 leading-relaxed">
+                প্রতিদিন সকালে আপনার ইনবক্সে গুরুত্বপূর্ণ সংবাদের সারাংশ পেতে
+                সাবস্ক্রাইব করুন।
+              </p>
+              <div class="space-y-3">
+                <input
+                  type="email"
+                  placeholder="আপনার ইমেইল"
+                  class="w-full bg-gray-900 border border-gray-800 px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors"
+                />
+                <button
+                  class="w-full bg-brand-red text-white font-sans font-bold py-3 hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20"
+                >
+                  সাবস্ক্রাইব করুন
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- Related Stories -->
           <section>
-            <div class="section-header">
-              <h2 class="section-title text-black">সম্পর্কিত খবর</h2>
+            <div
+              class="flex items-center gap-3 mb-6 border-b border-gray-200 pb-3"
+            >
+              <div class="w-1 h-6 bg-brand-red"></div>
+              <h2
+                class="font-sans font-bold text-lg text-gray-900 uppercase tracking-wide"
+              >
+                সম্পর্কিত খবর
+              </h2>
             </div>
             <div id="related-articles-list" class="space-y-6">
-              <p class="text-gray-400 text-sm font-serif italic">
-                সম্পর্কিত খবর লোড হচ্ছে...
-              </p>
+              <!-- Loading Skeletons -->
+              <div class="animate-pulse space-y-4">
+                <div class="flex gap-4">
+                  <div class="w-20 h-20 bg-gray-200 flex-shrink-0"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-3 bg-gray-200 w-1/4"></div>
+                    <div class="h-4 bg-gray-200 w-full"></div>
+                    <div class="h-4 bg-gray-200 w-2/3"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
-          <!-- Ad Placeholder -->
-          <div
-            class="bg-gray-50 h-[300px] flex flex-col items-center justify-center text-gray-400 text-[10px] border border-gray-100"
-          >
-            <span class="uppercase tracking-[0.2em] font-sans font-bold"
-              >বিজ্ঞাপন</span
+          <!-- Sticky Ad/Promo (ONLY LAST ITEM IS STICKY) -->
+          <div class="sticky top-32">
+            <div
+              class="bg-gray-100 h-[400px] flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-200 relative overflow-hidden group"
             >
+              <span
+                class="font-sans font-bold text-xs uppercase tracking-[0.2em] relative z-10"
+                >বিজ্ঞাপন স্থান</span
+              >
+              <div
+                class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              ></div>
+            </div>
           </div>
         </aside>
       </article>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white border-t-[6px] border-[#E90606]">
-      <div class="container mx-auto px-4 lg:px-8 py-20">
-        <div
-          class="flex flex-col md:flex-row justify-between items-start mb-16"
-        >
-          <div class="mb-10 md:mb-0">
-            <h2 class="font-display font-bold text-5xl mb-6 tracking-tight">
-              দ্য ডেইলি অরিজিন
-            </h2>
-            <div
-              class="flex space-x-8 text-xs font-sans font-bold uppercase tracking-widest text-gray-500"
-            >
-              <a href="#" class="hover:text-white transition-colors"
-                >আমাদের সম্পর্কে</a
-              >
-              <a href="#" class="hover:text-white transition-colors">যোগাযোগ</a>
-              <a href="#" class="hover:text-white transition-colors"
-                >ক্যারিয়ার</a
-              >
-            </div>
-          </div>
-          <div class="flex space-x-4">
-            <a
-              href="#"
-              class="w-10 h-10 border border-gray-800 flex items-center justify-center hover:bg-[#E90606] hover:border-[#E90606] transition-all"
-              ><i data-lucide="twitter" class="w-4 h-4"></i
-            ></a>
-            <a
-              href="#"
-              class="w-10 h-10 border border-gray-800 flex items-center justify-center hover:bg-[#E90606] hover:border-[#E90606] transition-all"
-              ><i data-lucide="facebook" class="w-4 h-4"></i
-            ></a>
-          </div>
+    <footer class="bg-black text-white py-16 border-t-4 border-brand-red">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="font-display font-bold text-4xl mb-8">দ্য ডেইলি অরিজিন</h2>
+        <div class="flex justify-center gap-6 mb-8">
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-900 flex items-center justify-center hover:bg-brand-red transition-colors"
+            ><i data-lucide="facebook" class="w-5 h-5"></i
+          ></a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-900 flex items-center justify-center hover:bg-brand-red transition-colors"
+            ><i data-lucide="twitter" class="w-5 h-5"></i
+          ></a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-900 flex items-center justify-center hover:bg-brand-red transition-colors"
+            ><i data-lucide="youtube" class="w-5 h-5"></i
+          ></a>
         </div>
-        <div class="border-t border-gray-900 pt-8 text-center md:text-left">
-          <p
-            class="font-sans text-[10px] uppercase tracking-widest text-gray-600"
-          >
-            © ২০২৫ দ্য ডেইলি অরিজিন। সর্বস্বত্ব সংরক্ষিত।
-          </p>
-        </div>
+        <p class="text-gray-600 text-sm font-sans">
+          © ২০২৫ দ্য ডেইলি অরিজিন। সত্যের সন্ধানে সর্বদা।
+        </p>
       </div>
     </footer>
 
     <!-- Search Modal -->
     <div
       id="search-overlay"
-      class="fixed inset-0 bg-white/95 z-[70] hidden transition-opacity duration-300"
+      class="fixed inset-0 bg-white/95 z-[70] hidden transition-opacity duration-300 backdrop-blur-sm"
     ></div>
     <div id="search-modal" class="fixed top-0 left-0 z-[80] w-full hidden">
       <div class="container mx-auto px-4 py-8">
-        <div class="flex items-center border-b-[3px] border-black pb-6">
-          <i data-lucide="search" class="w-8 h-8 text-black mr-4"></i>
+        <div class="relative max-w-3xl mx-auto">
           <input
             type="text"
             id="search-input"
-            placeholder="অনুসন্ধান করুন"
-            class="w-full text-3xl md:text-5xl font-display font-bold text-black placeholder-gray-200 focus:outline-none bg-transparent uppercase tracking-tight"
+            placeholder="কি খুঁজছেন?"
+            class="w-full text-4xl font-display font-bold text-black placeholder-gray-300 border-b-2 border-gray-100 pb-4 focus:outline-none focus:border-brand-red bg-transparent"
           />
           <button
             id="search-close-btn"
-            class="p-2 hover:bg-gray-100 rounded-full"
+            class="absolute right-0 top-0 p-2 hover:bg-gray-100 transition-colors"
           >
-            <i data-lucide="x" class="w-8 h-8"></i>
+            <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
           </button>
         </div>
       </div>
@@ -659,36 +771,40 @@
     <!-- Sign In Modal -->
     <div
       id="signin-overlay"
-      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden transition-opacity duration-300"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] hidden transition-opacity duration-300"
     ></div>
     <div
       id="signin-modal"
-      class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-full max-w-md hidden"
+      class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-full max-w-md hidden px-4"
     >
-      <div
-        class="bg-white p-8 md:p-12 shadow-2xl relative border-t-8 border-[#E90606]"
-      >
+      <div class="bg-white p-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-brand-red"></div>
         <button
           id="signin-close-btn"
-          class="absolute top-4 right-4 text-gray-400 hover:text-black"
+          class="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors"
         >
           <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <div class="text-center mb-6">
-          <h2 class="font-display font-bold text-3xl mb-2">স্বাগতম</h2>
-          <p class="font-serif text-gray-500 italic">
-            আপনার ব্যক্তিগত ফিড পেতে লগ ইন করুন।
+        <div class="text-center mb-8 pt-4">
+          <div
+            class="w-16 h-16 bg-red-50 flex items-center justify-center mx-auto mb-4 text-brand-red"
+          >
+            <i data-lucide="user" class="w-8 h-8"></i>
+          </div>
+          <h2 class="font-display font-bold text-2xl mb-2">স্বাগতম</h2>
+          <p class="font-sans text-gray-500 text-sm">
+            আপনার ব্যক্তিগত সংবাদ ফিড পেতে লগ ইন করুন।
           </p>
         </div>
         <button
-          class="w-full bg-black text-white font-sans font-bold uppercase tracking-[0.2em] py-4 hover:bg-[#E90606] transition-colors"
+          class="w-full bg-black text-white font-sans font-bold py-3.5 hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           লগ ইন করুন
         </button>
       </div>
     </div>
 
-    <!-- Logic -->
+    <!-- Logic (Preserved) -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
       import {
@@ -699,14 +815,12 @@
         query,
         where,
         limit,
-        onSnapshot,
         getDocs,
       } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
       import {
         getAuth,
         signInAnonymously,
         signInWithCustomToken,
-        onAuthStateChanged,
       } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
       // --- Config ---
@@ -727,7 +841,6 @@
           ? __initial_auth_token
           : null;
 
-      // Initialize globally to avoid re-init errors
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
       const db = getFirestore(app);
@@ -736,7 +849,6 @@
 
       // --- Refs ---
       const loadingOverlay = document.getElementById("loading-overlay");
-      const loadingText = document.getElementById("loading-text");
       const articleError = document.getElementById("article-error");
       const mainArticleContainer = document.getElementById(
         "main-article-container"
@@ -748,6 +860,8 @@
       const articleTitle = document.getElementById("article-title");
       const articleDate = document.getElementById("article-date");
       const articleAuthor = document.getElementById("article-author");
+      const articleAuthorRole = document.getElementById("article-author-role");
+      const articleReadTime = document.getElementById("article-read-time");
       const articleImage = document.getElementById("article-image");
       const articleImageCaption = document.getElementById(
         "article-image-caption"
@@ -760,7 +874,6 @@
       const authorBioImage = document.getElementById("author-bio-image");
       const authorBioName = document.getElementById("author-bio-name");
       const authorBioText = document.getElementById("author-bio-text");
-
       const relatedArticlesList = document.getElementById(
         "related-articles-list"
       );
@@ -770,7 +883,6 @@
       const canonicalLink = document.getElementById("canonical-link");
       const dynamicSchema = document.getElementById("dynamic-schema-json");
 
-      // --- Helper: Translate Categories ---
       const categoryTranslations = {
         World: "বিশ্ব",
         Politics: "রাজনীতি",
@@ -789,38 +901,32 @@
         return categoryTranslations[key] || key;
       }
 
-      // --- UI Functions (Mobile Menu, Search, Auth) ---
-      // Mobile Menu
+      // --- Interaction Logic ---
       const mobileMenu = document.getElementById("mobile-menu");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenuCloseBtn = document.getElementById(
-        "mobile-menu-close-btn"
-      );
 
       function toggleMenu(show) {
         if (show) {
           mobileMenu.classList.remove("-translate-x-full");
           mobileMenuOverlay.classList.remove("hidden");
           setTimeout(() => mobileMenuOverlay.classList.remove("opacity-0"), 10);
-          document.body.style.overflow = "hidden";
         } else {
           mobileMenu.classList.add("-translate-x-full");
           mobileMenuOverlay.classList.add("opacity-0");
           setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
-          document.body.style.overflow = "";
         }
       }
-      mobileMenuBtn.addEventListener("click", () => toggleMenu(true));
-      mobileMenuCloseBtn.addEventListener("click", () => toggleMenu(false));
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", () => toggleMenu(true));
+      document
+        .getElementById("mobile-menu-close-btn")
+        .addEventListener("click", () => toggleMenu(false));
       mobileMenuOverlay.addEventListener("click", () => toggleMenu(false));
 
-      // Search
+      // Search Logic
       const searchOverlay = document.getElementById("search-overlay");
       const searchModal = document.getElementById("search-modal");
-      const searchOpenBtn = document.getElementById("search-open-btn");
-      const searchCloseBtn = document.getElementById("search-close-btn");
-
       function toggleSearch(show) {
         if (show) {
           searchOverlay.classList.remove("hidden");
@@ -834,53 +940,99 @@
           }, 300);
         }
       }
-      searchOpenBtn.addEventListener("click", () => toggleSearch(true));
-      searchCloseBtn.addEventListener("click", () => toggleSearch(false));
+      document
+        .getElementById("search-open-btn")
+        .addEventListener("click", () => toggleSearch(true));
+      document
+        .getElementById("search-close-btn")
+        .addEventListener("click", () => toggleSearch(false));
 
-      // Auth
+      // Auth Logic
       const signinOverlay = document.getElementById("signin-overlay");
       const signinModal = document.getElementById("signin-modal");
-      const navSigninBtn = document.getElementById("nav-signin-btn");
-      const signinCloseBtn = document.getElementById("signin-close-btn");
-
-      navSigninBtn.addEventListener("click", () => {
-        signinOverlay.classList.remove("hidden");
-        signinModal.classList.remove("hidden");
-        setTimeout(() => {
-          signinOverlay.classList.remove("opacity-0");
-          signinModal.classList.add("opacity-100");
-        }, 10);
-      });
-      function closeSignin() {
-        signinOverlay.classList.add("opacity-0");
-        setTimeout(() => {
-          signinOverlay.classList.add("hidden");
-          signinModal.classList.add("hidden");
-        }, 300);
+      function toggleSignin(show) {
+        if (show) {
+          signinOverlay.classList.remove("hidden");
+          signinModal.classList.remove("hidden");
+          setTimeout(() => signinOverlay.classList.remove("opacity-0"), 10);
+        } else {
+          signinOverlay.classList.add("opacity-0");
+          setTimeout(() => {
+            signinOverlay.classList.add("hidden");
+            signinModal.classList.add("hidden");
+          }, 300);
+        }
       }
-      signinCloseBtn.addEventListener("click", closeSignin);
-      signinOverlay.addEventListener("click", closeSignin);
+      document
+        .getElementById("nav-signin-btn")
+        .addEventListener("click", () => toggleSignin(true));
+      document
+        .getElementById("signin-close-btn")
+        .addEventListener("click", () => toggleSignin(false));
+      signinOverlay.addEventListener("click", () => toggleSignin(false));
 
-      // --- Helper: Format Time ---
+      // --- Content Logic ---
+
+      // Bangla Month Short Names
+      const banglaMonthsShort = [
+        "জানু",
+        "ফেব্রু",
+        "মার্চ",
+        "এপ্রিল",
+        "মে",
+        "জুন",
+        "জুলাই",
+        "আগস্ট",
+        "সেপ্টে",
+        "অক্টো",
+        "নভে",
+        "ডিসে",
+      ];
+
       function formatRelativeTime(date) {
         if (date?.toDate) date = date.toDate();
         const now = new Date();
         const seconds = Math.floor((now - date) / 1000);
+
+        // Very recent
         if (seconds < 60) return "এইমাত্র";
-        const minutes = Math.floor(seconds / 60);
-        if (minutes < 60) return `${minutes} মিনিট আগে`;
-        const hours = Math.floor(minutes / 60);
-        if (hours < 24) return `${hours} ঘণ্টা আগে`;
-        return date.toLocaleDateString("bn-BD", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        });
+
+        // Create custom shortened date string
+        const day = date.getDate().toLocaleString("bn-BD");
+        const monthIndex = date.getMonth();
+        const year = date
+          .getFullYear()
+          .toLocaleString("bn-BD")
+          .replace(/,/g, "");
+
+        return `${day} ${banglaMonthsShort[monthIndex]}, ${year}`;
+      }
+
+      function calculateReadingTime(text) {
+        if (!text) return 1;
+        const words = text.replace(/<[^>]*>/g, "").split(/\s+/).length;
+        const minutes = Math.ceil(words / 200);
+        return minutes;
+      }
+
+      function deriveAuthorRole(bio) {
+        if (!bio) return "নিজস্ব প্রতিবেদক";
+        const keywords = [
+          "সম্পাদক",
+          "প্রতিবেদক",
+          "সাংবাদিক",
+          "বিশ্লেষক",
+          "কলামিস্ট",
+        ];
+        for (const word of keywords) {
+          if (bio.includes(word)) return word;
+        }
+        return "নিজস্ব প্রতিবেদক"; // Default
       }
 
       function generateArticleBody(summary) {
         return `
-            <p class="text-2xl font-display italic text-gray-700 leading-relaxed mb-8 border-b border-gray-100 pb-8">${summary}</p>
+            <p class="font-medium text-xl leading-relaxed text-gray-800 drop-cap">${summary}</p>
             <p>এটি একটি চলমান ঘটনা। দ্য ডেইলি অরিজিন সক্রিয়ভাবে আরও তথ্য সংগ্রহ করছে এবং উপলব্ধ হওয়ার সাথে সাথে আপডেট প্রদান করবে। পরিস্থিতি পরিবর্তনশীল, এবং কর্তৃপক্ষ জনসাধারণকে যাচাইকৃত উত্সের উপর নির্ভর করার আহ্বান জানিয়েছে।</p>
             <h2>ঘটনার মূল বিষয়</h2>
             <p>এই ঘটনার মূলে রয়েছে একাধিক কারণের একটি জটিল জাল যা কয়েক মাস ধরে তৈরি হচ্ছিল। ঘটনার সাথে সংশ্লিষ্ট সূত্রগুলো জানায় যে মঙ্গলবার ভোরের দিকে নেওয়া একটি সিদ্ধান্তই ছিল মূল অনুঘটক, যা সমগ্র শিল্প জুড়ে আলোড়ন সৃষ্টি করেছে।</p>
@@ -888,33 +1040,34 @@
             <p>বিশ্লেষকরা মনে করছেন যে এই পদক্ষেপটি আগামী দশকের জন্য বাজারের প্রত্যাশাকে নতুনভাবে সংজ্ঞায়িত করতে পারে।</p>
             <h3>এরপর কী হবে?</h3>
             <p>সবার চোখ এখন আগামী শুক্রবারের জরুরি বৈঠকের দিকে। এই বৈঠকের ফলাফল সম্ভবত পরবর্তী ত্রৈমাসিকের গতিপথ নির্ধারণ করবে এবং এর প্রভাব তাৎক্ষণিক স্টেকহোল্ডারদের ছাড়িয়ে আরও অনেক দূর পর্যন্ত গড়াতে পারে।</p>
-            <p><strong>দ্য ডেইলি অরিজিন</strong> ঘটনাপ্রবাহের লাইভ কভারেজ প্রদান করবে।</p>
         `;
       }
 
-      // --- Rendering Logic ---
-
       function renderArticle(article) {
         document.title = `${article.title} | দ্য ডেইলি অরিজিন`;
-
-        const catLabel = getCategoryLabel(article.category);
-        articleCategoryLink.innerText = catLabel || "সাধারণ";
+        articleCategoryLink.innerText = getCategoryLabel(article.category);
         articleCategoryLink.href = `./category?category=${article.category}`;
         articleTitle.innerText = article.title;
         articleDate.innerText = formatRelativeTime(article.publishedAt);
         articleAuthor.innerText =
           article.authorName || "দ্য ডেইলি অরিজিন ডেস্ক";
-
         articleImage.src =
           article.imageUrl ||
           "https://source.unsplash.com/random/1200x800?news";
         articleImageCaption.innerText = `ছবি: ${article.title}`;
 
-        if (article.body) {
-          articleContentBody.innerHTML = article.body;
-        } else {
-          articleContentBody.innerHTML = generateArticleBody(article.summary);
+        // Body & Reading Time
+        let bodyContent = article.body;
+        if (!bodyContent) {
+          bodyContent = generateArticleBody(article.summary);
         }
+        articleContentBody.innerHTML = bodyContent;
+
+        // Calculate Reading Time dynamically
+        const minutes = calculateReadingTime(bodyContent);
+        articleReadTime.innerText = `পড়তে ${minutes.toLocaleString(
+          "bn-BD"
+        )} মিনিট লাগবে`;
 
         loadingOverlay.classList.add("hidden");
       }
@@ -922,29 +1075,35 @@
       function renderRelatedArticles(articles) {
         if (articles.length === 0) {
           relatedArticlesList.innerHTML =
-            '<p class="text-gray-400 text-sm italic">কোনো সম্পর্কিত খবর পাওয়া যায়নি।</p>';
+            '<p class="text-gray-400 text-sm">কোনো খবর পাওয়া যায়নি।</p>';
           return;
         }
-
         relatedArticlesList.innerHTML = articles
           .map(
             (a) => `
              <a href="./article?id=${
                a.id
-             }" class="block group border-b border-gray-100 pb-4 last:border-0">
-                <span class="text-[9px] font-bold text-[#E90606] uppercase tracking-[0.15em] mb-1 block font-sans">${getCategoryLabel(
-                  a.category
-                )}</span>
-                <h4 class="font-display font-bold text-lg text-black group-hover:text-[#E90606] transition-colors leading-tight">
-                   ${a.title}
-                </h4>
+             }" class="flex gap-4 group cursor-pointer p-2 hover:bg-gray-50 transition-colors">
+                <div class="w-20 h-20 overflow-hidden flex-shrink-0 bg-gray-200">
+                    <img src="${
+                      a.imageUrl || "https://placehold.co/100"
+                    }" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" alt="${
+              a.title
+            }">
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-brand-red uppercase tracking-wider mb-1 block font-sans">${getCategoryLabel(
+                      a.category
+                    )}</span>
+                    <h4 class="font-display font-bold text-base text-gray-900 leading-snug group-hover:text-brand-red transition-colors line-clamp-2">
+                       ${a.title}
+                    </h4>
+                </div>
              </a>
           `
           )
           .join("");
       }
-
-      // --- Author & SEO ---
 
       async function loadAuthorInfo(authorId) {
         if (!authorId) return null;
@@ -961,44 +1120,27 @@
             authorBioName.innerText = data.name;
             authorBioText.innerText = data.bio;
             if (data.imageUrl) authorBioImage.src = data.imageUrl;
+
+            // Derive Role/Title Dynamically
+            articleAuthorRole.innerText = deriveAuthorRole(data.bio);
+
             return data;
           }
         } catch (e) {
-          console.error("Author load error", e);
+          console.error("Author error", e);
         }
         return null;
       }
 
       function updateSeoTags(article, author) {
         const url = window.location.href;
-        const desc = article.summary || "দ্য ডেইলি অরিজিন থেকে সর্বশেষ সংবাদ";
+        const desc = article.summary || "সর্বশেষ সংবাদ";
         const img = article.imageUrl || "";
-
         metaDescription.content = desc;
         canonicalLink.href = url;
-
-        // OG
-        document.getElementById("og-url").content = url;
         document.getElementById("og-title").content = article.title;
-        document.getElementById("og-description").content = desc;
         document.getElementById("og-image").content = img;
-
-        // Schema
-        const schema = {
-          "@context": "https://schema.org",
-          "@type": "NewsArticle",
-          headline: article.title,
-          image: [img],
-          datePublished: article.publishedAt?.toDate().toISOString(),
-          author: {
-            "@type": "Person",
-            name: author ? author.name : article.authorName || "Staff",
-          },
-        };
-        dynamicSchema.textContent = JSON.stringify(schema);
       }
-
-      // --- Init ---
 
       async function init() {
         const params = new URLSearchParams(window.location.search);
@@ -1012,26 +1154,19 @@
         }
 
         try {
-          // Robust Authentication Flow (Try-Catch wrapped)
           if (initialAuthToken) {
             await signInWithCustomToken(auth, initialAuthToken);
           } else {
             await auth.authStateReady();
             if (!auth.currentUser) {
               try {
-                // This may fail on mobile IP addresses (domain restriction)
                 await signInAnonymously(auth);
-              } catch (authErr) {
-                console.warn(
-                  "Authentication failed (likely domain restriction). Attempting to load public data anyway.",
-                  authErr
-                );
-                // We continue execution to try and fetch data
+              } catch (e) {
+                console.warn("Auth failed", e);
               }
             }
           }
 
-          // Fetch Article
           const docRef = doc(
             db,
             `artifacts/${appId}/public/data/articles`,
@@ -1041,9 +1176,11 @@
 
           if (snap.exists()) {
             const article = { id: snap.id, ...snap.data() };
+
+            // We need author loaded to get the role before full render sometimes,
+            // but we call renderArticle first to show skeleton/basic data
             renderArticle(article);
 
-            // Fetch Related
             try {
               const q = query(
                 collection(db, `artifacts/${appId}/public/data/articles`),
@@ -1057,11 +1194,8 @@
                   related.push({ id: d.id, ...d.data() });
               });
               renderRelatedArticles(related);
-            } catch (err) {
-              console.warn("Could not fetch related articles", err);
-            }
+            } catch (err) {}
 
-            // Author & SEO
             const author = await loadAuthorInfo(article.authorId);
             updateSeoTags(article, author);
           } else {
@@ -1071,26 +1205,26 @@
           }
         } catch (e) {
           console.error("Init Error", e);
-          // CRITICAL FIX: Hide the loader even if everything fails
           loadingOverlay.classList.add("hidden");
-
-          // Show Error UI
           mainArticleContainer.classList.add("hidden");
           articleError.classList.remove("hidden");
-
-          // Add helpful debug info for mobile users
-          const errTitle = articleError.querySelector("h2");
-          const errText = articleError.querySelector("p");
-          if (errTitle) errTitle.innerText = "সংযোগ ত্রুটি";
-          if (errText)
-            errText.innerText =
-              "কন্টেন্ট লোড করা যায়নি। (Error: " + e.message + ")";
         }
       }
 
       document.addEventListener("DOMContentLoaded", () => {
         lucide.createIcons();
         init();
+
+        // Progress Bar Listener
+        window.addEventListener("scroll", () => {
+          const winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+          const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          document.getElementById("progress-bar").style.width = scrolled + "%";
+        });
       });
     </script>
   </body>
