@@ -1,9 +1,101 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>দ্য ডেইলি অরিজিন | বিশ্বমানের সাংবাদিকতা</title>
+
+    <!-- PRIMARY SEO -->
+    <title>দ্য ডেইলি অরিজিন | নিরপেক্ষ ও নির্ভীক সংবাদ</title>
+    <meta
+      name="description"
+      content="দ্য ডেইলি অরিজিন - বাংলাদেশের সবচেয়ে নির্ভরযোগ্য অনলাইন সংবাদ মাধ্যম। জাতীয়, রাজনীতি, অর্থনীতি, আন্তর্জাতিক, খেলাধুলা ও বিনোদনের সর্বশেষ ব্রেকিং নিউজ এবং বিশ্লেষণ পড়ুন।"
+    />
+    <meta
+      name="keywords"
+      content="Bangla News, Bangladesh News, Latest News BD, Breaking News Bangla, The Daily Origin, বাংলা সংবাদ, আজকের খবর, ব্রেকিং নিউজ"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://bn.thedailyorigin.net/" />
+    <link rel="alternate" hreflang="bn" href="https://bn.thedailyorigin.net/" />
+
+    <!-- OPEN GRAPH / FACEBOOK -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bn.thedailyorigin.net/" />
+    <meta
+      property="og:title"
+      content="দ্য ডেইলি অরিজিন | নিরপেক্ষ ও নির্ভীক সংবাদ"
+    />
+    <meta
+      property="og:description"
+      content="বাংলাদেশের সবচেয়ে নির্ভরযোগ্য অনলাইন সংবাদ মাধ্যম। জাতীয়, রাজনীতি, অর্থনীতি ও আন্তর্জাতিক বিশ্বের সর্বশেষ খবর জানুন।"
+    />
+    <meta
+      property="og:image"
+      content="https://bn.thedailyorigin.net/the_daily_origin_cover.jpg"
+    />
+    <meta property="og:locale" content="bn_BD" />
+    <meta property="og:site_name" content="The Daily Origin" />
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://bn.thedailyorigin.net/" />
+    <meta
+      name="twitter:title"
+      content="দ্য ডেইলি অরিজিন | নিরপেক্ষ ও নির্ভীক সংবাদ"
+    />
+    <meta
+      name="twitter:description"
+      content="বাংলাদেশের সবচেয়ে নির্ভরযোগ্য অনলাইন সংবাদ মাধ্যম। সর্বশেষ খবর এবং বিশ্লেষণ পড়ুন।"
+    />
+    <meta
+      name="twitter:image"
+      content="https://bn.thedailyorigin.net/the_daily_origin_cover.jpg"
+    />
+
+    <!-- SCHEMA.ORG JSON-LD (CRITICAL FOR RANKING) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NewsMediaOrganization",
+        "name": "The Daily Origin",
+        "alternateName": "দ্য ডেইলি অরিজিন",
+        "url": "https://bn.thedailyorigin.net/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bn.thedailyorigin.net/logo.png",
+          "width": 600,
+          "height": 60
+        },
+        "sameAs": [
+          "https://www.facebook.com/thedailyorigin",
+          "https://twitter.com/thedailyorigin",
+          "https://www.instagram.com/thedailyorigin"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+8801750087889",
+          "contactType": "newsroom",
+          "areaServed": "BD",
+          "availableLanguage": "Bengali"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://bn.thedailyorigin.net/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://bn.thedailyorigin.net/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -20,19 +112,6 @@
       type="image/x-icon"
     />
 
-    <!-- SEO & Metadata -->
-    <meta
-      name="description"
-      content="প্রযুক্তি, রাজনীতি, সংস্কৃতি, বিজ্ঞান এবং আরও অনেক বিষয়ে নিরপেক্ষ, অপরিবর্তিত এবং আপসহীন ব্রেকিং নিউজ পান। দ্য ডেইলি অরিজিন তথ্যের ভবিষ্যৎ।"
-    />
-    <link rel="canonical" href="https://www.thedailyorigin.com/" />
-    <meta
-      property="og:title"
-      content="দ্য ডেইলি অরিজিন | বিশ্বমানের সাংবাদিকতা"
-    />
-    <meta property="og:site_name" content="দ্য ডেইলি অরিজিন" />
-    <meta property="og:type" content="website" />
-
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -41,16 +120,14 @@
       :root {
         --font-sans: "Hind Siliguri", sans-serif;
         --font-serif: "Noto Serif Bengali", serif;
-        --font-display: "Noto Serif Bengali", serif; /* Using Serif for display in Bangla for elegance */
-        --color-brand: #000000; /* Pure Black */
-        --color-accent: #c90000; /* Deep Editorial Red */
+        --font-display: "Noto Serif Bengali", serif;
+        --color-brand: #000000;
+        --color-accent: #c90000;
         --color-bg: #ffffff;
       }
 
       body {
-        font-family: var(
-          --font-sans
-        ); /* Default to sans for better readability in Bangla UI */
+        font-family: var(--font-sans);
         background-color: var(--color-bg);
         color: #111;
         overflow-x: hidden;
@@ -66,7 +143,7 @@
       h5,
       h6 {
         font-family: var(--font-display);
-        letter-spacing: 0; /* Bangla doesn't need negative tracking */
+        letter-spacing: 0;
       }
 
       p {
@@ -98,7 +175,7 @@
         color: #111;
         font-family: var(--font-sans);
         font-weight: 600;
-        font-size: 0.9rem; /* Slightly larger for Bangla */
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0;
         padding: 0.5rem 0;
@@ -193,7 +270,7 @@
         top: 0;
         width: 1.75rem;
         height: 1.75rem;
-        border-radius: 50%; /* Circle */
+        border-radius: 50%;
         background-color: #111;
         color: #fff;
         font-weight: 700;
@@ -216,24 +293,6 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
-      }
-
-      /* Modal Transitions */
-      .modal-bg-enter {
-        opacity: 0;
-      }
-      .modal-bg-enter-active {
-        opacity: 1;
-        transition: opacity 0.3s ease;
-      }
-      .modal-content-enter {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      .modal-content-enter-active {
-        opacity: 1;
-        transform: translateY(0);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       /* Scrollbar */
@@ -351,17 +410,23 @@
 
         <!-- Desktop Navigation Strip -->
         <div class="hidden lg:block nav-strip py-3">
-          <nav class="flex justify-center items-center space-x-10">
+          <nav
+            class="flex justify-center items-center space-x-8 text-xs font-bold"
+          >
+            <a href="./category?category=National" class="nav-link">জাতীয়</a>
             <a href="./category?category=World" class="nav-link">বিশ্ব</a>
-            <a href="./category?category=Tech" class="nav-link">প্রযুক্তি</a>
+            <a href="./category?category=Election" class="nav-link">নির্বাচন</a>
             <a href="./category?category=Politics" class="nav-link">রাজনীতি</a>
             <a href="./category?category=Business" class="nav-link">বাণিজ্য</a>
-            <a href="./category?category=Health" class="nav-link">স্বাস্থ্য</a>
+            <a href="./category?category=Tech" class="nav-link">প্রযুক্তি</a>
             <a href="./category?category=Science" class="nav-link">বিজ্ঞান</a>
-            <a href="./category?category=Sports" class="nav-link">খেলাধুলা</a>
+            <a href="./category?category=Health" class="nav-link">স্বাস্থ্য</a>
             <a href="./category?category=Entertainment" class="nav-link"
-              >মতামত</a
+              >বিনোদন</a
             >
+            <a href="./category?category=Sports" class="nav-link">খেলাধুলা</a>
+            <a href="./category?category=Opinion" class="nav-link">মতামত</a>
+            <a href="./category?category=Others" class="nav-link">অন্যান্য</a>
           </nav>
         </div>
       </div>
@@ -391,14 +456,14 @@
       </div>
       <nav class="flex-grow overflow-y-auto py-6 px-4 space-y-2">
         <a
+          href="./category?category=National"
+          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          >জাতীয়</a
+        >
+        <a
           href="./category?category=World"
           class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
           >বিশ্ব</a
-        >
-        <a
-          href="./category?category=Tech"
-          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >প্রযুক্তি</a
         >
         <a
           href="./category?category=Politics"
@@ -406,14 +471,24 @@
           >রাজনীতি</a
         >
         <a
-          href="./category?category=Culture"
+          href="./category?category=Election"
           class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >সংস্কৃতি</a
+          >নির্বাচন</a
         >
         <a
-          href="./category?category=Science"
+          href="./category?category=Business"
           class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
-          >বিজ্ঞান</a
+          >বাণিজ্য</a
+        >
+        <a
+          href="./category?category=Tech"
+          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          >প্রযুক্তি</a
+        >
+        <a
+          href="./category?category=Entertainment"
+          class="block py-2 text-xl font-display font-bold text-black border-b border-gray-100 hover:text-[#E90606]"
+          >বিনোদন</a
         >
         <a
           href="./category?category=Sports"
@@ -487,6 +562,44 @@
             </div>
           </section>
 
+          <!-- National Section (New) -->
+          <section id="national-section">
+            <div class="section-header">
+              <h2 class="section-title text-black">জাতীয় সংবাদ</h2>
+              <a
+                href="./category?category=National"
+                class="text-[10px] font-sans font-bold uppercase tracking-widest hover:text-[#E90606]"
+                >সব দেখুন</a
+              >
+            </div>
+            <div
+              id="national-news-list"
+              class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12"
+            >
+              <!-- JS Injected -->
+            </div>
+          </section>
+
+          <!-- Election Banner (New) -->
+          <section
+            id="election-section"
+            class="bg-gray-50 p-6 border border-gray-200 rounded-sm"
+          >
+            <div class="section-header !border-t-0 !mb-4">
+              <h2 class="section-title text-[#E90606] flex items-center">
+                <i data-lucide="vote" class="w-4 h-4 mr-2"></i>নির্বাচন ২০২৫
+              </h2>
+              <a
+                href="./category?category=Election"
+                class="text-[10px] font-sans font-bold uppercase tracking-widest hover:text-[#E90606]"
+                >কভারেজ দেখুন</a
+              >
+            </div>
+            <div id="election-news-list" class="grid grid-cols-1 gap-6">
+              <!-- JS Injected -->
+            </div>
+          </section>
+
           <!-- World Section -->
           <section id="world-section">
             <div class="section-header">
@@ -502,6 +615,24 @@
             </div>
           </section>
 
+          <!-- Business Section (New) -->
+          <section id="business-section">
+            <div class="section-header">
+              <h2 class="section-title text-black">বাণিজ্য ও অর্থনীতি</h2>
+              <a
+                href="./category?category=Business"
+                class="text-[10px] font-sans font-bold uppercase tracking-widest hover:text-[#E90606]"
+                >সব দেখুন</a
+              >
+            </div>
+            <div
+              id="business-news-list"
+              class="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
+              <!-- JS Injected -->
+            </div>
+          </section>
+
           <!-- Sports Section -->
           <section
             id="sports-section"
@@ -509,7 +640,7 @@
           >
             <div class="flex items-center justify-between mb-10">
               <h2 class="font-display text-4xl font-bold text-black">
-                খেলাধুলা ও সংস্কৃতি
+                খেলাধুলা
               </h2>
               <a
                 href="./category?category=Sports"
@@ -520,6 +651,24 @@
             <div
               id="sports-news-list"
               class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+            >
+              <!-- JS Injected -->
+            </div>
+          </section>
+
+          <!-- Entertainment Section (New) -->
+          <section id="entertainment-section" class="pt-10">
+            <div class="section-header">
+              <h2 class="section-title text-black">বিনোদন ও সংস্কৃতি</h2>
+              <a
+                href="./category?category=Entertainment"
+                class="text-[10px] font-sans font-bold uppercase tracking-widest hover:text-[#E90606]"
+                >সব দেখুন</a
+              >
+            </div>
+            <div
+              id="entertainment-news-list"
+              class="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
               <!-- JS Injected -->
             </div>
@@ -542,11 +691,9 @@
         >
           <!-- Newsletter Widget -->
           <div class="bg-[#E90606] text-white p-10 relative overflow-hidden">
-            <!-- Abstract graphic -->
             <div
               class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"
             ></div>
-
             <span
               class="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] mb-3 text-white/80"
               >নিউজলেটার</span
@@ -572,12 +719,47 @@
             </div>
           </div>
 
+          <!-- Opinion Section (New) -->
+          <section id="opinion-section">
+            <div class="section-header">
+              <h2 class="section-title text-black">মতামত</h2>
+              <a
+                href="./category?category=Opinion"
+                class="text-[10px] font-sans font-bold uppercase tracking-widest hover:text-[#E90606]"
+                >সব</a
+              >
+            </div>
+            <div id="opinion-news-list" class="space-y-6">
+              <!-- JS Injected -->
+            </div>
+          </section>
+
           <!-- Tech Section -->
           <section id="tech-section">
             <div class="section-header">
               <h2 class="section-title text-black">প্রযুক্তি</h2>
             </div>
             <div id="tech-news-list" class="space-y-8">
+              <!-- JS Injected -->
+            </div>
+          </section>
+
+          <!-- Science Section (New) -->
+          <section id="science-section">
+            <div class="section-header">
+              <h2 class="section-title text-black">বিজ্ঞান ও মহাকাশ</h2>
+            </div>
+            <div id="science-news-list" class="space-y-8">
+              <!-- JS Injected -->
+            </div>
+          </section>
+
+          <!-- Health Section (New) -->
+          <section id="health-section">
+            <div class="section-header">
+              <h2 class="section-title text-black">স্বাস্থ্য ও জীবন</h2>
+            </div>
+            <div id="health-news-list" class="space-y-8">
               <!-- JS Injected -->
             </div>
           </section>
@@ -604,52 +786,85 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white border-t-[6px] border-[#E90606]">
-      <div class="container mx-auto px-4 lg:px-8 py-20">
+    <!-- Footer Component Start -->
+    <footer
+      class="bg-black text-white border-t-[6px] border-[#E90606] relative overflow-hidden"
+    >
+      <!-- Subtle Grid Background Pattern -->
+      <div
+        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"
+      ></div>
+
+      <div class="container mx-auto px-4 lg:px-8 py-16 relative z-10">
+        <!-- Top Section: Brand & Socials -->
         <div
           class="flex flex-col md:flex-row justify-between items-start mb-16"
         >
           <div class="mb-10 md:mb-0">
             <h2
-              class="font-display font-black text-4xl md:text-5xl mb-6 tracking-tight"
+              class="font-display font-black text-4xl md:text-5xl mb-6 tracking-tight text-white drop-shadow-sm"
             >
               দ্য ডেইলি অরিজিন
             </h2>
             <div
               class="flex flex-wrap gap-4 md:gap-8 text-xs font-sans font-bold uppercase tracking-widest text-gray-500"
             >
-              <a href="#" class="hover:text-white transition-colors"
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
                 >আমাদের সম্পর্কে</a
               >
-              <a href="#" class="hover:text-white transition-colors">যোগাযোগ</a>
-              <a href="#" class="hover:text-white transition-colors"
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >যোগাযোগ</a
+              >
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
                 >ক্যারিয়ার</a
               >
-              <a href="#" class="hover:text-white transition-colors">প্রেস</a>
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >প্রেস</a
+              >
             </div>
           </div>
           <div class="flex space-x-4">
             <a
               href="#"
-              class="w-12 h-12 border border-gray-800 flex items-center justify-center hover:bg-[#E90606] hover:border-[#E90606] transition-all"
-              ><i data-lucide="twitter" class="w-5 h-5"></i
-            ></a>
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="twitter"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
             <a
               href="#"
-              class="w-12 h-12 border border-gray-800 flex items-center justify-center hover:bg-[#E90606] hover:border-[#E90606] transition-all"
-              ><i data-lucide="facebook" class="w-5 h-5"></i
-            ></a>
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="facebook"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
             <a
               href="#"
-              class="w-12 h-12 border border-gray-800 flex items-center justify-center hover:bg-[#E90606] hover:border-[#E90606] transition-all"
-              ><i data-lucide="instagram" class="w-5 h-5"></i
-            ></a>
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="instagram"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
           </div>
         </div>
 
+        <!-- Middle Section: Links Grid -->
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-12 text-sm text-gray-400 border-t border-gray-900 pt-12 font-serif"
+          class="grid grid-cols-2 md:grid-cols-4 gap-12 text-sm text-gray-400 border-t border-gray-900 pt-12 font-serif pb-8"
         >
           <ul>
             <li
@@ -658,13 +873,19 @@
               বিশ্ব
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">মার্কিন রাজনীতি</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >মার্কিন রাজনীতি</a
+              >
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">আন্তর্জাতিক সংবাদ</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >আন্তর্জাতিক সংবাদ</a
+              >
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">জলবায়ু পরিবর্তন</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >জলবায়ু পরিবর্তন</a
+              >
             </li>
           </ul>
           <ul>
@@ -674,13 +895,15 @@
               উদ্ভাবন
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">বাণিজ্য</a>
+              <a href="#" class="hover:text-white transition-colors">বাণিজ্য</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">প্রযুক্তি</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >প্রযুক্তি</a
+              >
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">বিজ্ঞান</a>
+              <a href="#" class="hover:text-white transition-colors">বিজ্ঞান</a>
             </li>
           </ul>
           <ul>
@@ -689,12 +912,18 @@
             >
               সংস্কৃতি
             </li>
-            <li class="mb-2"><a href="#" class="hover:text-white">বই</a></li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">শিল্পকলা</a>
+              <a href="#" class="hover:text-white transition-colors">বই</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">লাইফস্টাইল</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >শিল্পকলা</a
+              >
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >লাইফস্টাইল</a
+              >
             </li>
           </ul>
           <ul>
@@ -704,15 +933,78 @@
               আইনগত
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">গোপনীয়তা নীতি</a>
+              <a href="#" class="hover:text-white transition-colors"
+                >গোপনীয়তা নীতি</a
+              >
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-white">ব্যবহারের শর্তাবলী</a>
-            </li>
-            <li class="mb-2 text-xs mt-4 opacity-50 font-sans">
-              © ২০২৫ দ্য ডেইলি অরিজিন
+              <a href="#" class="hover:text-white transition-colors"
+                >ব্যবহারের শর্তাবলী</a
+              >
             </li>
           </ul>
+        </div>
+
+        <!-- Bottom Section: Copyright & Developer Credit -->
+        <div
+          class="border-t border-gray-900 mt-8 pt-8 flex flex-col-reverse md:flex-row justify-between items-center gap-8"
+        >
+          <div class="text-xs text-gray-600 font-sans">
+            © ২০২৫ দ্য ডেইলি অরিজিন
+          </div>
+          <!-- Built By Badge -->
+          <div class="group relative inline-flex">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-red-600 via-purple-600 to-red-600 rounded-full opacity-30 group-hover:opacity-75 blur-md transition duration-500 animate-tilt"
+            ></div>
+            <div
+              class="relative flex items-center gap-3 bg-black/95 backdrop-blur-xl rounded-full pl-1.5 pr-5 py-1.5 border border-white/10 shadow-2xl ring-1 ring-white/5"
+            >
+              <a
+                href="https://shadikhossain.onrender.com"
+                target="_blank"
+                class="relative block shrink-0 group/img"
+              >
+                <div
+                  class="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-red-500 transition-colors duration-300"
+                >
+                  <img
+                    src="the_daily_origin_founder.jpg"
+                    alt="Shadik Hossain"
+                    class="w-full h-full object-cover transform group-hover/img:scale-110 transition-transform duration-500"
+                    onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Shadik+Hossain&background=18181b&color=e4e4e7';"
+                  />
+                </div>
+                <div
+                  class="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-black rounded-full"
+                ></div>
+              </a>
+              <div class="flex flex-col justify-center leading-none space-y-1">
+                <div class="flex items-center gap-1.5">
+                  <span
+                    class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold"
+                    >Built by</span
+                  >
+                  <a
+                    href="https://shadikhossain.onrender.com"
+                    target="_blank"
+                    class="text-xs font-bold text-gray-200 group-hover:text-white transition-colors hover:underline decoration-red-500/50 underline-offset-2"
+                    >Shadik Hossain</a
+                  >
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9px] text-zinc-600">Founder of</span>
+                  <a
+                    href="https://softshilpo.com"
+                    target="_blank"
+                    class="flex items-center gap-1 text-[9px] font-semibold text-red-400 hover:text-red-300 transition-colors bg-red-900/10 px-2 py-0.5 rounded-full border border-red-500/20"
+                    >SoftShilpo
+                    <i data-lucide="arrow-up-right" class="w-2.5 h-2.5"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -774,14 +1066,12 @@
         >
           <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-
         <div class="text-center mb-8">
           <h2 class="font-display font-bold text-3xl mb-2">স্বাগতম</h2>
           <p class="font-serif text-gray-500 italic">
             আপনার ব্যক্তিগত ফিড পেতে লগ ইন করুন।
           </p>
         </div>
-
         <form id="signin-form" class="space-y-5">
           <div>
             <label
@@ -814,7 +1104,6 @@
             লগ ইন করুন
           </button>
         </form>
-
         <div class="mt-6 text-center">
           <a
             href="#"
@@ -872,7 +1161,6 @@
       let app, db, auth;
       let userId = null;
       let allArticles = [];
-
       const appId =
         typeof __app_id !== "undefined" ? __app_id : "default-news-app";
       const initialAuthToken =
@@ -887,12 +1175,25 @@
       const breakingNewsTicker = document.getElementById(
         "breaking-news-ticker"
       );
-      const techNewsList = document.getElementById("tech-news-list");
-      const worldNewsList = document.getElementById("world-news-list");
+
+      // Section Refs
       const politicsNewsList = document.getElementById("politics-news-list");
+      const nationalNewsList = document.getElementById("national-news-list");
+      const electionNewsList = document.getElementById("election-news-list");
+      const worldNewsList = document.getElementById("world-news-list");
+      const businessNewsList = document.getElementById("business-news-list");
       const sportsNewsList = document.getElementById("sports-news-list");
-      const educationNewsList = document.getElementById("education-news-list");
+      const entertainmentNewsList = document.getElementById(
+        "entertainment-news-list"
+      );
       const othersNewsList = document.getElementById("others-news-list");
+
+      // Sidebar Refs
+      const techNewsList = document.getElementById("tech-news-list");
+      const scienceNewsList = document.getElementById("science-news-list");
+      const healthNewsList = document.getElementById("health-news-list");
+      const educationNewsList = document.getElementById("education-news-list");
+      const opinionNewsList = document.getElementById("opinion-news-list");
 
       // Mobile Menu Refs
       const mobileMenu = document.getElementById("mobile-menu");
@@ -1015,8 +1316,6 @@
       }
 
       // --- Auth / Sign In Logic ---
-      // We simulate a user login visually because the app uses anonymous auth for db access.
-
       let isUserSignedInUI =
         localStorage.getItem("tdo_user_signed_in") === "true";
 
@@ -1036,7 +1335,6 @@
         if (show) {
           signinOverlay.classList.remove("hidden");
           signinModal.classList.remove("hidden");
-          // Simple anim
           setTimeout(() => {
             signinOverlay.classList.remove("opacity-0");
             signinModal.classList.add("translate-y-0", "opacity-100");
@@ -1053,7 +1351,6 @@
       navSigninBtn.addEventListener("click", () => toggleSigninModal(true));
       mobileSigninBtn.addEventListener("click", () => {
         if (isUserSignedInUI) {
-          // Sign out
           isUserSignedInUI = false;
           localStorage.setItem("tdo_user_signed_in", "false");
           updateAuthUI();
@@ -1068,11 +1365,9 @@
 
       signinForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        // Simulate login success
         const btn = signinForm.querySelector("button");
         const originalText = btn.textContent;
         btn.textContent = "যাচাই করা হচ্ছে...";
-
         setTimeout(() => {
           isUserSignedInUI = true;
           localStorage.setItem("tdo_user_signed_in", "true");
@@ -1082,7 +1377,6 @@
         }, 800);
       });
 
-      // Handle Sign Out click on profile
       userProfileDisplay.addEventListener("click", () => {
         if (confirm("দ্য ডেইলি অরিজিন থেকে লগ আউট করতে চান?")) {
           isUserSignedInUI = false;
@@ -1091,15 +1385,13 @@
         }
       });
 
-      // --- Render Functions (Stupendous Typography) ---
+      // --- Render Functions ---
 
       function renderAllArticles(articles) {
-        // Separate Logic
         const hero = articles.find((a) => a.isHero);
         const top = articles.filter((a) => a.isTopStory);
         const breaking = articles.filter((a) => a.isBreaking);
 
-        // HTML Generation
         if (hero) heroStoryContainer.innerHTML = createHeroHTML(hero);
         else
           heroStoryContainer.innerHTML = `<div class="p-8 bg-white border border-gray-200 text-center text-gray-500">কোনো প্রধান খবর নেই।</div>`;
@@ -1123,26 +1415,35 @@
           breakingNewsTicker.innerHTML = `<div class="ticker-content">${tickerHtml}</div><div class="ticker-content">${tickerHtml}</div>`;
         }
 
-        // Lists
         const getCat = (cat) => articles.filter((a) => a.category === cat);
 
-        // Politics: Grid Layout
+        // Rendering Main Sections
         renderList(politicsNewsList, getCat("Politics").slice(0, 4), "grid");
-        // World: List Layout
+        renderList(nationalNewsList, getCat("National").slice(0, 4), "grid");
+        renderList(electionNewsList, getCat("Election").slice(0, 3), "list"); // Simple list for Election
         renderList(worldNewsList, getCat("World").slice(0, 3), "list");
-        // Sports: Cards
+        renderList(businessNewsList, getCat("Business").slice(0, 2), "grid");
         renderList(sportsNewsList, getCat("Sports").slice(0, 3), "card");
-        // Sidebar: Compact
+        renderList(
+          entertainmentNewsList,
+          getCat("Entertainment").slice(0, 4),
+          "mini-card"
+        ); // New type
+        renderList(othersNewsList, getCat("Others").slice(0, 5), "sidebar");
+
+        // Rendering Sidebar Sections
+        renderList(opinionNewsList, getCat("Opinion").slice(0, 4), "opinion"); // New type
         renderList(techNewsList, getCat("Tech").slice(0, 3), "sidebar");
+        renderList(scienceNewsList, getCat("Science").slice(0, 3), "sidebar");
+        renderList(healthNewsList, getCat("Health").slice(0, 3), "sidebar");
         renderList(
           educationNewsList,
           getCat("Education").slice(0, 3),
           "sidebar"
         );
-        renderList(othersNewsList, getCat("Others").slice(0, 5), "sidebar");
 
         loadingOverlay.classList.add("hidden");
-        updateAuthUI(); // Ensure auth UI is correct on load
+        updateAuthUI();
       }
 
       function renderList(container, articles, type) {
@@ -1156,12 +1457,16 @@
           container.innerHTML = articles.map(createListRowHTML).join("");
         } else if (type === "card") {
           container.innerHTML = articles.map(createStandardCardHTML).join("");
+        } else if (type === "mini-card") {
+          container.innerHTML = articles.map(createMiniCardHTML).join("");
+        } else if (type === "opinion") {
+          container.innerHTML = articles.map(createOpinionHTML).join("");
         } else {
           container.innerHTML = articles.map(createSidebarHTML).join("");
         }
       }
 
-      // --- Template Strings (High-End Editorial Design) ---
+      // --- Template Strings ---
 
       function createHeroHTML(article) {
         return `
@@ -1169,11 +1474,7 @@
                <div class="w-full h-full">
                   <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="${article.title}">
                </div>
-               
-               <!-- Gradient Overlay -->
                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
-               
-               <!-- Content Overlay -->
                <div class="absolute bottom-0 left-0 p-8 md:p-14 w-full md:max-w-5xl">
                   <div class="flex items-center space-x-3 mb-5">
                      <span class="bg-[#E90606] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 font-sans">${article.category}</span>
@@ -1208,7 +1509,7 @@
         return `
             <a href="./article?id=${article.id}" class="group block flex flex-col h-full border-b border-gray-100 pb-8 md:border-none md:pb-0">
                <div class="h-64 overflow-hidden mb-5 relative bg-gray-100">
-                  <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=tech'">
+                  <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=grid${article.id}'">
                </div>
                <div class="flex-1">
                   <span class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-3 block font-sans">${article.category}</span>
@@ -1228,7 +1529,7 @@
         return `
              <a href="./article?id=${article.id}" class="group flex flex-col md:flex-row items-start border-t border-black py-10 first:border-t-0">
                 <div class="w-full md:w-5/12 mb-6 md:mb-0 md:mr-10 h-64 md:h-64 flex-shrink-0 bg-gray-100 overflow-hidden relative">
-                   <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=world'">
+                   <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=list${article.id}'">
                 </div>
                 <div class="flex-1 pt-2">
                    <div class="flex items-center space-x-3 mb-4">
@@ -1249,12 +1550,44 @@
         return `
             <a href="./article?id=${article.id}" class="group block h-full">
                <div class="h-56 overflow-hidden mb-5 bg-gray-100">
-                   <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=spt'">
+                   <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://source.unsplash.com/random/400x300?sig=card${article.id}'">
                </div>
                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-2 block font-sans">${article.category}</span>
                <h3 class="headline text-xl text-black group-hover:underline decoration-[#E90606] decoration-2 underline-offset-4">
                   ${article.title}
                </h3>
+            </a>
+         `;
+      }
+
+      // New: Mini Card for Entertainment (Image focused)
+      function createMiniCardHTML(article) {
+        return `
+            <a href="./article?id=${article.id}" class="group block relative h-48 overflow-hidden">
+               <img src="${article.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://source.unsplash.com/random/300x300?sig=mini${article.id}'">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                  <h4 class="text-white font-display text-sm font-bold leading-tight group-hover:text-[#E90606] transition-colors">${article.title}</h4>
+               </div>
+            </a>
+         `;
+      }
+
+      // New: Opinion Layout
+      function createOpinionHTML(article) {
+        return `
+            <a href="./article?id=${
+              article.id
+            }" class="group block border-b border-gray-100 pb-6 last:border-0 flex gap-4">
+               <div class="text-[#E90606] pt-1"><i data-lucide="quote" class="w-4 h-4 fill-current"></i></div>
+               <div>
+                  <h4 class="headline text-lg text-black group-hover:text-[#E90606] transition-colors mb-2 italic">
+                     "${article.title}"
+                  </h4>
+                  <div class="flex items-center text-xs text-gray-500 font-sans font-bold uppercase tracking-widest">
+                     <span class="w-6 h-[1px] bg-[#E90606] mr-2"></span>
+                     ${article.authorName || "সম্পাদকীয়"}
+                  </div>
+               </div>
             </a>
          `;
       }
@@ -1277,20 +1610,17 @@
           app = initializeApp(firebaseConfig);
           db = getFirestore(app);
           auth = getAuth(app);
-
           onAuthStateChanged(auth, async (user) => {
             if (user) {
               userId = user.uid;
               loadData();
             } else {
-              // Attempt silent auth if not logged in
               try {
                 if (initialAuthToken)
                   await signInWithCustomToken(auth, initialAuthToken);
                 else await signInAnonymously(auth);
               } catch (e) {
-                console.warn("Auth failed (likely domain restriction)", e);
-                // Fallback: Try loading data without auth (if rules permit)
+                console.warn("Auth failed", e);
                 loadData();
               }
             }
@@ -1303,7 +1633,6 @@
 
       function loadData() {
         const path = `artifacts/${appId}/public/data/articles`;
-        // Use catch here too to ensure we hide the loader even if query fails
         onSnapshot(
           query(collection(db, path)),
           (snapshot) => {
@@ -1331,15 +1660,52 @@
 
       async function addDemoData() {
         console.log("Adding demo data...");
-        // Only if empty
         const batch = writeBatch(db);
         const path = `artifacts/${appId}/public/data/articles`;
-
         const demos = [
+          // National
+          {
+            title: "মেগা প্রজেক্টের কাজ শেষ পর্যায়ে, উদ্বোধনের অপেক্ষায়",
+            summary: "জাতীয় উন্নয়নের নতুন দিগন্ত উন্মোচন হতে যাচ্ছে।",
+            category: "National",
+            imageUrl:
+              "https://source.unsplash.com/800x600/?bridge,construction",
+            publishedAt: serverTimestamp(),
+            isHero: false,
+            isTopStory: true,
+            isBreaking: false,
+            authorName: "Rahim Uddin",
+          },
+          {
+            title: "শীতের আগমনে উত্তরাঞ্চলে প্রস্তুতি জোরদার",
+            summary: "সরকারি ও বেসরকারি উদ্যোগে চলছে কম্বল বিতরণ কার্যক্রম।",
+            category: "National",
+            imageUrl: "https://source.unsplash.com/800x600/?winter,fog",
+            publishedAt: serverTimestamp(),
+            isHero: false,
+            isTopStory: false,
+            isBreaking: false,
+          },
+
+          // Election
+          {
+            title: "নির্বাচন কমিশনের নতুন রূপরেখা ঘোষণা",
+            summary:
+              "আগামী নির্বাচনের জন্য স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত করার প্রতিশ্রুতি।",
+            category: "Election",
+            imageUrl: "https://source.unsplash.com/800x600/?voting,ballot",
+            publishedAt: serverTimestamp(),
+            isHero: false,
+            isTopStory: false,
+            isBreaking: true,
+            authorName: "Political Desk",
+          },
+
+          // World
           {
             title: "জলবায়ু কর্মপরিকল্পনার লক্ষ্যে ঐতিহাসিক বৈশ্বিক চুক্তি",
             summary:
-              "বিশ্ব নেতারা নবায়নযোগ্য শক্তিতে রূপান্তর ত্বরান্বিত করতে সর্বসম্মতভাবে সম্মত হয়েছেন, আজ জেনেভায় স্বাক্ষরিত ঐতিহাসিক চুক্তিতে ২০৩০ সালের জন্য উচ্চাভিলাষী লক্ষ্য নির্ধারণ করা হয়েছে।",
+              "বিশ্ব নেতারা নবায়নযোগ্য শক্তিতে রূপান্তর ত্বরান্বিত করতে সর্বসম্মতভাবে সম্মত হয়েছেন।",
             category: "World",
             imageUrl:
               "https://source.unsplash.com/800x600/?conference,politics",
@@ -1350,9 +1716,38 @@
             authorName: "Sarah Jenkins",
           },
           {
+            title: "মধ্যপ্রাচ্যে শান্তি আলোচনায় নতুন মোড়",
+            summary: "কূটনৈতিক তৎপরতা বৃদ্ধির ফলে আশার আলো দেখছেন বিশ্লেষকরা।",
+            category: "World",
+            imageUrl: "https://source.unsplash.com/800x600/?peace,diplomacy",
+            publishedAt: serverTimestamp(),
+          },
+
+          // Business
+          {
+            title: "স্টার্টআপ খাতে বিদেশি বিনিয়োগের জোয়ার",
+            summary:
+              "প্রযুক্তিভিত্তিক নতুন উদ্যোগে আগ্রহ দেখাচ্ছে আন্তর্জাতিক বিনিয়োগকারীরা।",
+            category: "Business",
+            imageUrl: "https://source.unsplash.com/800x600/?startup,office",
+            publishedAt: serverTimestamp(),
+            isHero: false,
+            isTopStory: true,
+            isBreaking: false,
+          },
+          {
+            title: "শেয়ার বাজারে সূচকের উর্ধ্বগতি",
+            summary: "টানা তৃতীয় দিনের মতো ইতিবাচক ধারায় লেনদেন শেষ হয়েছে।",
+            category: "Business",
+            imageUrl: "https://source.unsplash.com/800x600/?stock,market",
+            publishedAt: serverTimestamp(),
+          },
+
+          // Tech
+          {
             title: "কোয়ান্টাম চিপের ব্রেকথ্রু: প্রসেসিং ক্ষমতা দ্বিগুণ",
             summary:
-              "সিলিকন ভ্যালির জায়ান্ট এমন একটি প্রসেসর উন্মোচন করেছে যা মুরের আইনকে চ্যালেঞ্জ করছে, এআই এবং জটিল মডেলিংয়ের জন্য নতুন যুগের প্রতিশ্রুতি দিচ্ছে।",
+              "সিলিকন ভ্যালির জায়ান্ট এমন একটি প্রসেসর উন্মোচন করেছে যা মুরের আইনকে চ্যালেঞ্জ করছে।",
             category: "Tech",
             imageUrl: "https://source.unsplash.com/800x600/?chip,circuit",
             publishedAt: serverTimestamp(),
@@ -1361,36 +1756,46 @@
             isBreaking: true,
             authorName: "David Chen",
           },
+
+          // Health
           {
-            title:
-              "মিনিমালিস্ট আর্কিটেকচার: কেন স্থাপত্য আবার তার মূলে ফিরে আসছে",
+            title: "নতুন টিকার সফল ট্রায়াল, আশার আলো",
             summary:
-              "শীর্ষ স্থপতিরা শহুরে পরিবেশে টেকসই, মানবকেন্দ্রিক নকশার দিকে ব্রুটালিজম থেকে সরে আসার বিষয়ে আলোচনা করছেন।",
-            category: "Culture",
+              "গবেষকরা জানিয়েছেন, এই টিকাটি দীর্ঘমেয়াদী সুরক্ষা প্রদানে সক্ষম।",
+            category: "Health",
+            imageUrl: "https://source.unsplash.com/800x600/?vaccine,lab",
+            publishedAt: serverTimestamp(),
+          },
+          {
+            title: "শীতকালীন রোগ থেকে বাঁচার উপায়",
+            summary: "বিশেষজ্ঞ চিকিৎসকদের পরামর্শ মেনে চললে সুস্থ থাকা সম্ভব।",
+            category: "Health",
             imageUrl:
-              "https://source.unsplash.com/800x600/?architecture,modern",
+              "https://source.unsplash.com/800x600/?doctor,consultation",
             publishedAt: serverTimestamp(),
-            isHero: false,
-            isTopStory: true,
-            isBreaking: false,
-            authorName: "Elena Rossi",
+          },
+
+          // Science
+          {
+            title: "মঙ্গল গ্রহে পানির অস্তিত্বের নতুন প্রমাণ",
+            summary: "নাসার রোভার থেকে পাঠানো ছবিতে চমকপ্রদ তথ্য পাওয়া গেছে।",
+            category: "Science",
+            imageUrl: "https://source.unsplash.com/800x600/?mars,planet",
+            publishedAt: serverTimestamp(),
           },
           {
-            title: "অ্যারিজোনা মরুভূমিতে মঙ্গল গ্রহের কলোনি প্রোটোটাইপ সম্পন্ন",
-            summary:
-              "নাসার সর্বশেষ সিমুলেশন পরিবেশটি এক বছরের বিচ্ছিন্নতা পরীক্ষার জন্য ছয়জনের একটি দলকে হোস্ট করতে প্রস্তুত।",
+            title: "ব্ল্যাক হোল নিয়ে নতুন তত্ত্ব দিলেন বিজ্ঞানীরা",
+            summary: "মহাকাশ গবেষণায় এক নতুন অধ্যায়ের সূচনা হতে পারে।",
             category: "Science",
-            imageUrl: "https://source.unsplash.com/800x600/?mars,desert",
+            imageUrl: "https://source.unsplash.com/800x600/?space,galaxy",
             publishedAt: serverTimestamp(),
-            isHero: false,
-            isTopStory: false,
-            isBreaking: false,
-            authorName: "Dr. Alan Grant",
           },
+
+          // Sports
           {
             title: "অসাধারণ জয়ে চ্যাম্পিয়নশিপ নিশ্চিত করল আন্ডারডগ দল",
             summary:
-              "সকল প্রতিকূলতার বিরুদ্ধে, ডিফেন্ডিং চ্যাম্পিয়নদের ৩-১ গোলে পরাজিত করে এমন একটি ম্যাচ যা কয়েক দশক মনে রাখা হবে।",
+              "সকল প্রতিকূলতার বিরুদ্ধে, ডিফেন্ডিং চ্যাম্পিয়নদের ৩-১ গোলে পরাজিত করে ইতিহাস।",
             category: "Sports",
             imageUrl: "https://source.unsplash.com/800x600/?stadium,crowd",
             publishedAt: serverTimestamp(),
@@ -1399,41 +1804,62 @@
             isBreaking: true,
             authorName: "Marcus Green",
           },
+
+          // Entertainment
           {
-            title: "সিনেটে নতুন শিক্ষা সংস্কার বিল পাস",
-            summary:
-              "বিতর্কিত বিলটি মানসম্মত পরীক্ষা পদ্ধতি পরিবর্তন এবং পাবলিক স্কুলগুলিতে আর্ট প্রোগ্রামের জন্য তহবিল বৃদ্ধির প্রতিশ্রুতি দেয়।",
-            category: "Education",
-            imageUrl: "https://source.unsplash.com/800x600/?school,student",
+            title: "আন্তর্জাতিক চলচ্চিত্র উৎসবে বাংলাদেশের সিনেমা",
+            summary: "সমালোচকদের প্রশংসা কুড়াচ্ছে তরুণ নির্মাতার এই ছবি।",
+            category: "Entertainment",
+            imageUrl: "https://source.unsplash.com/800x600/?cinema,movie",
             publishedAt: serverTimestamp(),
-            isHero: false,
-            isTopStory: false,
-            isBreaking: false,
-            authorName: "Lisa Ray",
           },
           {
-            title: "বাজেট প্রস্তাব নিয়ে সিনেটে অচলাবস্থা অব্যাহত",
-            summary:
-              "অবকাঠামো ব্যয় নিয়ে মতবিরোধ বার্ষিক বাজেটের অগ্রগতি থামিয়ে দিয়েছে, যা সরকার অচল হওয়ার আশঙ্কা তৈরি করেছে।",
-            category: "Politics",
-            imageUrl: "https://source.unsplash.com/800x600/?capitol,vote",
+            title: "জনপ্রিয় ব্যান্ডের পুনর্মিলনী কনসার্ট",
+            summary: "দীর্ঘদিন পর এক মঞ্চে গাইলেন ব্যান্ডের পুরনো সদস্যরা।",
+            category: "Entertainment",
+            imageUrl: "https://source.unsplash.com/800x600/?concert,music",
             publishedAt: serverTimestamp(),
-            isHero: false,
-            isTopStory: false,
-            isBreaking: true,
-            authorName: "James Hold",
           },
+
+          // Opinion
+          {
+            title: "ডিজিটাল যুগে সাংবাদিকতার চ্যালেঞ্জ",
+            summary:
+              "সত্য ও মিথ্যার পার্থক্য করা এখন আগের চেয়ে কঠিন হয়ে দাঁড়িয়েছে।",
+            category: "Opinion",
+            imageUrl: "https://source.unsplash.com/800x600/?writing,journal",
+            publishedAt: serverTimestamp(),
+            authorName: "ড. আসিফ নজরুল",
+          },
+          {
+            title: "শহুরে জীবনে প্রকৃতির প্রয়োজন",
+            summary: "মানসিক স্বাস্থ্যের জন্য সবুজ পরিবেশ অপরিহার্য।",
+            category: "Opinion",
+            imageUrl: "https://source.unsplash.com/800x600/?nature,park",
+            publishedAt: serverTimestamp(),
+            authorName: "সাদিয়া ইসলাম",
+          },
+
+          // Others
           {
             title: "স্যাটেলাইট ইমেজের মাধ্যমে লুকানো পিরামিড আবিষ্কার",
             summary:
-              "নতুন স্ক্যানিং প্রযুক্তি আমাজন রেইনফরেস্টের গভীরে এমন কাঠামো প্রকাশ করেছে যা ইতিহাস নতুন করে লিখতে পারে।",
+              "নতুন স্ক্যানিং প্রযুক্তি আমাজন রেইনফরেস্টের গভীরে এমন কাঠামো প্রকাশ করেছে।",
             category: "Others",
             imageUrl: "https://source.unsplash.com/800x600/?jungle,ruins",
             publishedAt: serverTimestamp(),
-            isHero: false,
-            isTopStory: false,
-            isBreaking: false,
-            authorName: "Indiana Jones",
+          },
+
+          // Politics
+          {
+            title: "বাজেট প্রস্তাব নিয়ে সিনেটে অচলাবস্থা অব্যাহত",
+            summary:
+              "অবকাঠামো ব্যয় নিয়ে মতবিরোধ বার্ষিক বাজেটের অগ্রগতি থামিয়ে দিয়েছে।",
+            category: "Politics",
+            imageUrl: "https://source.unsplash.com/800x600/?capitol,vote",
+            publishedAt: serverTimestamp(),
+            isBreaking: true,
+            authorName: "James Hold",
           },
         ];
 

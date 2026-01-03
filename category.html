@@ -1,9 +1,55 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- PRIMARY SEO -->
     <title id="dynamic-title">বিভাগ লোড হচ্ছে... | দ্য ডেইলি অরিজিন</title>
+    <meta
+      id="dynamic-description"
+      name="description"
+      content="সর্বশেষ সংবাদ এবং আপডেট..."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link
+      id="dynamic-canonical"
+      rel="canonical"
+      href="https://bn.thedailyorigin.net/category"
+    />
+
+    <!-- OPEN GRAPH (DYNAMICALLY UPDATED) -->
+    <meta property="og:type" content="website" />
+    <meta id="og-title" property="og:title" content="দ্য ডেইলি অরিজিন" />
+    <meta
+      id="og-description"
+      property="og:description"
+      content="সর্বশেষ সংবাদ এবং আপডেট..."
+    />
+    <meta
+      id="og-url"
+      property="og:url"
+      content="https://bn.thedailyorigin.net/category"
+    />
+    <meta
+      property="og:image"
+      content="https://bn.thedailyorigin.net/the_daily_origin_cover.jpg"
+    />
+    <meta property="og:locale" content="bn_BD" />
+    <meta property="og:site_name" content="The Daily Origin" />
+
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta id="tw-title" name="twitter:title" content="দ্য ডেইলি অরিজিন" />
+    <meta
+      id="tw-description"
+      name="twitter:description"
+      content="সর্বশেষ সংবাদ এবং আপডেট..."
+    />
+    <meta
+      name="twitter:image"
+      content="https://bn.thedailyorigin.net/the_daily_origin_cover.jpg"
+    />
 
     <!-- Tailwind CSS with Custom Config -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,19 +82,6 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@100..900&display=swap"
       rel="stylesheet"
-    />
-
-    <!-- SEO Metadata -->
-    <meta
-      id="dynamic-description"
-      name="description"
-      content="সর্বশেষ সংবাদ লোড হচ্ছে..."
-    />
-    <meta name="robots" content="index, follow" />
-    <link
-      id="dynamic-canonical"
-      rel="canonical"
-      href="https://www.thedailyorigin.com/category"
     />
 
     <!-- Icons -->
@@ -101,16 +134,11 @@
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      /* Search Bar Transition */
-      #search-bar {
-        transition: all 0.3s ease;
-      }
-
-      /* --- NEWS TRACKER STYLES (MATCHING INDEX.HTML) --- */
+      /* Ticker Styles */
       .ticker-wrap {
         width: 100%;
         overflow: hidden;
-        background-color: #e90606; /* Red background for breaking news */
+        background-color: #e90606;
         color: white;
         height: 100%;
         display: flex;
@@ -137,6 +165,27 @@
           transform: translateX(-50%);
         }
       }
+
+      /* Nav Link Hover Effect */
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #e90606;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .nav-link.active::after {
+        width: 100%;
+      }
     </style>
   </head>
   <body class="antialiased flex flex-col min-h-screen">
@@ -154,8 +203,8 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="border-b-4 border-black sticky top-0 bg-white z-50">
-      <!-- Top Utility Bar (Desktop) -->
+    <nav class="border-b border-gray-200 sticky top-0 bg-white z-50 shadow-sm">
+      <!-- Top Utility Bar -->
       <div
         class="hidden lg:flex justify-between items-center px-6 py-2 bg-black text-white text-[10px] uppercase tracking-widest font-bold"
       >
@@ -168,74 +217,111 @@
         </div>
       </div>
 
-      <!-- Main Nav -->
-      <div
-        class="max-w-[1440px] mx-auto px-6 h-20 lg:h-24 flex items-center justify-between"
-      >
-        <!-- Mobile Menu Trigger -->
-        <button
-          id="mobile-menu-btn"
-          class="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-full transition"
-        >
-          <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
-
-        <!-- Logo -->
-        <a
-          href="index.html"
-          class="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:left-0 flex flex-col items-center lg:items-start group"
-        >
-          <h1
-            class="font-display text-3xl lg:text-4xl font-bold tracking-tighter leading-none group-hover:opacity-80 transition-opacity"
+      <!-- Main Nav Header -->
+      <div class="max-w-[1440px] mx-auto px-4 lg:px-8">
+        <div class="h-20 flex items-center justify-between">
+          <!-- Mobile Menu Trigger -->
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-full transition"
           >
-            দ্য ডেইলি অরিজিন<span class="text-[#E90606]">.</span>
-          </h1>
-        </a>
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
 
-        <!-- Desktop Links -->
-        <div class="hidden lg:flex items-center space-x-8">
+          <!-- Logo -->
+          <a
+            href="index.html"
+            class="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 flex flex-col items-center lg:items-start group"
+          >
+            <h1
+              class="font-display text-3xl lg:text-4xl font-black tracking-tighter leading-none group-hover:opacity-80 transition-opacity"
+            >
+              দ্য ডেইলি অরিজিন<span class="text-[#E90606]">.</span>
+            </h1>
+          </a>
+
+          <!-- Search Toggle -->
+          <div class="flex items-center">
+            <button
+              id="search-toggle"
+              class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Desktop Nav Strip (Updated with all categories) -->
+        <div
+          class="hidden lg:flex items-center justify-center border-t border-gray-100 py-3 space-x-6 overflow-x-auto"
+        >
+          <a
+            href="./category?category=National"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >জাতীয়</a
+          >
           <a
             href="./category?category=World"
-            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#E90606] hover:after:w-full after:transition-all"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
             >বিশ্ব</a
           >
           <a
+            href="./category?category=Election"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap text-[#E90606]"
+            >নির্বাচন</a
+          >
+          <a
             href="./category?category=Politics"
-            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#E90606] hover:after:w-full after:transition-all"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
             >রাজনীতি</a
           >
           <a
+            href="./category?category=Business"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >বাণিজ্য</a
+          >
+          <a
             href="./category?category=Tech"
-            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#E90606] hover:after:w-full after:transition-all"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
             >প্রযুক্তি</a
           >
           <a
-            href="./category?category=Culture"
-            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#E90606] hover:after:w-full after:transition-all"
-            >সংস্কৃতি</a
+            href="./category?category=Science"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >বিজ্ঞান</a
+          >
+          <a
+            href="./category?category=Health"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >স্বাস্থ্য</a
+          >
+          <a
+            href="./category?category=Entertainment"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >বিনোদন</a
           >
           <a
             href="./category?category=Sports"
-            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#E90606] hover:after:w-full after:transition-all"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
             >খেলাধুলা</a
           >
-        </div>
-
-        <!-- Search Toggle -->
-        <div class="flex items-center">
-          <button
-            id="search-toggle"
-            class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          <a
+            href="./category?category=Opinion"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >মতামত</a
           >
-            <i data-lucide="search" class="w-5 h-5"></i>
-          </button>
+          <a
+            href="./category?category=Others"
+            class="nav-link text-xs font-bold uppercase tracking-widest hover:text-[#E90606] transition-colors whitespace-nowrap"
+            >অন্যান্য</a
+          >
         </div>
       </div>
 
       <!-- Inline Search Bar (Hidden by default) -->
       <div
         id="search-bar"
-        class="hidden border-t border-gray-100 bg-gray-50 overflow-hidden"
+        class="hidden border-t border-gray-100 bg-gray-50 overflow-hidden absolute w-full z-40 shadow-lg"
       >
         <div class="max-w-[1440px] mx-auto px-6 py-4 flex items-center gap-4">
           <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
@@ -258,69 +344,102 @@
     <!-- Mobile Menu Sidebar -->
     <div
       id="mobile-menu"
-      class="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-black text-white z-[60] transform -translate-x-full overflow-y-auto"
+      class="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white text-black z-[60] transform -translate-x-full overflow-y-auto border-r-4 border-[#E90606] shadow-2xl"
     >
-      <div class="p-8 flex flex-col h-full">
-        <div class="flex justify-between items-center mb-12">
-          <span class="font-display text-2xl font-bold">মেনু</span>
+      <div class="p-6 flex flex-col h-full">
+        <div
+          class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4"
+        >
+          <span class="font-display text-2xl font-bold text-black">মেনু</span>
           <button
             id="mobile-menu-close"
-            class="p-2 hover:bg-white/10 rounded-full transition"
+            class="p-2 hover:bg-gray-100 rounded-full transition text-black"
           >
             <i data-lucide="x" class="w-6 h-6"></i>
           </button>
         </div>
 
-        <div class="flex flex-col space-y-6 mb-auto">
+        <div class="flex flex-col space-y-4 mb-auto">
           <a
             href="index.html"
-            class="text-3xl font-display font-bold hover:text-[#E90606] transition-colors"
+            class="text-xl font-display font-bold hover:text-[#E90606] transition-colors border-b border-gray-100 pb-2"
             >নীড়পাতা</a
+          >
+
+          <a
+            href="./category?category=National"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >জাতীয়</a
           >
           <a
             href="./category?category=World"
-            class="text-2xl font-serif font-bold text-gray-300 hover:text-white hover:pl-2 transition-all"
-            >বিশ্ব সংবাদ</a
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >বিশ্ব</a
+          >
+          <a
+            href="./category?category=Election"
+            class="text-lg font-serif font-bold text-[#E90606] hover:pl-2 transition-all"
+            >নির্বাচন ২০২৫</a
           >
           <a
             href="./category?category=Politics"
-            class="text-2xl font-serif font-bold text-gray-300 hover:text-white hover:pl-2 transition-all"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
             >রাজনীতি</a
           >
           <a
+            href="./category?category=Business"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >বাণিজ্য</a
+          >
+          <a
             href="./category?category=Tech"
-            class="text-2xl font-serif font-bold text-gray-300 hover:text-white hover:pl-2 transition-all"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
             >প্রযুক্তি</a
           >
           <a
-            href="./category?category=Culture"
-            class="text-2xl font-serif font-bold text-gray-300 hover:text-white hover:pl-2 transition-all"
-            >সংস্কৃতি</a
+            href="./category?category=Science"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >বিজ্ঞান</a
+          >
+          <a
+            href="./category?category=Health"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >স্বাস্থ্য</a
+          >
+          <a
+            href="./category?category=Entertainment"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >বিনোদন</a
           >
           <a
             href="./category?category=Sports"
-            class="text-2xl font-serif font-bold text-gray-300 hover:text-white hover:pl-2 transition-all"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
             >খেলাধুলা</a
+          >
+          <a
+            href="./category?category=Opinion"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >মতামত</a
+          >
+          <a
+            href="./category?category=Others"
+            class="text-lg font-serif font-bold text-gray-700 hover:text-[#E90606] hover:pl-2 transition-all"
+            >অন্যান্য</a
           >
         </div>
 
-        <div class="pt-12 border-t border-white/20">
+        <div class="pt-8 border-t border-gray-200 mt-4">
           <button
-            class="w-full py-4 bg-[#E90606] text-white font-bold uppercase tracking-widest text-xs mb-4"
+            class="w-full py-4 bg-black text-white font-bold uppercase tracking-widest text-xs mb-4 hover:bg-[#E90606] transition-colors"
           >
             সাবস্ক্রাইব
           </button>
-          <p
-            class="text-[10px] text-gray-500 uppercase tracking-widest text-center"
-          >
-            &copy; ২০২৫ দ্য ডেইলি অরিজিন
-          </p>
         </div>
       </div>
     </div>
     <div
       id="mobile-overlay"
-      class="fixed inset-0 bg-white/80 backdrop-blur-sm z-[55] hidden transition-opacity"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[55] hidden transition-opacity"
     ></div>
 
     <!-- Breaking News Ticker -->
@@ -337,10 +456,8 @@
           >
         </div>
         <div class="flex-1 overflow-hidden relative h-full ml-28">
-          <!-- Ticker Content Wrapper -->
           <div class="ticker-wrap">
             <div class="ticker-move" id="breaking-news-ticker">
-              <!-- Content Injected via JS -->
               <div class="ticker-content">
                 <span
                   class="text-xs font-bold uppercase tracking-wider opacity-80 px-4"
@@ -360,7 +477,7 @@
         <div class="absolute top-0 left-0 w-24 h-1 bg-black"></div>
         <h1
           id="category-header-title"
-          class="font-display font-bold text-6xl md:text-8xl lg:text-9xl mb-6 tracking-tighter mt-8"
+          class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 tracking-tighter mt-8 text-black"
         >
           লোড হচ্ছে
         </h1>
@@ -374,10 +491,12 @@
             নির্বাচিত গল্প, বিশেষজ্ঞ বিশ্লেষণ এবং গভীর প্রতিবেদন।
           </p>
           <div
-            class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest"
+            class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E90606]"
           >
-            <span class="w-2 h-2 bg-[#E90606] rounded-full"></span>
-            লাইভ ফিড
+            <span
+              class="w-2 h-2 bg-[#E90606] rounded-full animate-pulse"
+            ></span>
+            লাইভ আপডেট
           </div>
         </div>
       </header>
@@ -387,7 +506,7 @@
         <!-- Main Article List (Span 8) -->
         <div class="lg:col-span-8">
           <div class="flex items-center justify-between mb-8">
-            <h2 class="font-bold text-sm uppercase tracking-widest">
+            <h2 class="font-bold text-sm uppercase tracking-widest text-black">
               সর্বশেষ সংবাদ
             </h2>
             <div class="h-[1px] bg-gray-200 flex-grow ml-4"></div>
@@ -395,8 +514,9 @@
 
           <div id="category-articles-list" class="space-y-16">
             <!-- Loading Skeletons -->
-            <div class="animate-pulse space-y-4">
-              <div class="aspect-[16/9] bg-gray-100 w-full"></div>
+            <div class="animate-pulse space-y-6">
+              <div class="aspect-[16/9] bg-gray-100 w-full rounded-sm"></div>
+              <div class="h-4 bg-gray-100 w-1/4"></div>
               <div class="h-8 bg-gray-100 w-3/4"></div>
               <div class="h-20 bg-gray-100 w-full"></div>
             </div>
@@ -404,21 +524,30 @@
         </div>
 
         <!-- Sidebar (Span 4) -->
-        <aside class="lg:col-span-4 space-y-16">
+        <aside
+          class="lg:col-span-4 space-y-16 pl-0 lg:pl-8 lg:border-l lg:border-gray-100"
+        >
           <!-- Newsletter Widget -->
-          <div class="bg-gray-50 border border-gray-100 p-8 text-center">
-            <h3 class="font-display text-3xl mb-2 font-bold">সংবাদ সংক্ষেপ</h3>
-            <p class="font-serif text-sm text-gray-500 italic mb-6">
-              প্রতিদিনের প্রয়োজনীয় সংবাদ, আপনার ইনবক্সে।
+          <div class="bg-black text-white p-8 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-gray-800 rounded-full blur-2xl opacity-50"
+            ></div>
+            <h3 class="font-display text-3xl mb-2 font-bold relative z-10">
+              সংবাদ সংক্ষেপ
+            </h3>
+            <p
+              class="font-serif text-sm text-gray-300 italic mb-6 relative z-10"
+            >
+              প্রতিদিনের প্রয়োজনীয় সংবাদ, সরাসরি আপনার ইনবক্সে।
             </p>
-            <div class="space-y-3">
+            <div class="space-y-3 relative z-10">
               <input
                 type="email"
                 placeholder="ইমেইল ঠিকানা"
-                class="w-full px-4 py-3 bg-white border border-gray-200 focus:border-black focus:ring-0 transition-colors font-serif text-sm"
+                class="w-full px-4 py-3 bg-white/10 border border-white/20 text-white focus:border-white focus:ring-0 transition-colors font-serif text-sm placeholder:text-gray-500"
               />
               <button
-                class="w-full bg-black text-white font-bold uppercase text-[10px] tracking-[0.2em] py-3 hover:bg-[#E90606] transition-colors"
+                class="w-full bg-[#E90606] text-white font-bold uppercase text-[10px] tracking-[0.2em] py-3 hover:bg-red-700 transition-colors"
               >
                 সাবস্ক্রাইব
               </button>
@@ -439,107 +568,214 @@
               <!-- Sidebar items injected here -->
             </div>
           </div>
-
-          <!-- Advertisement / Box -->
-          <div
-            class="aspect-square bg-black flex items-center justify-center text-white p-8 text-center"
-          >
-            <div>
-              <span
-                class="block text-[10px] uppercase tracking-widest opacity-50 mb-2"
-                >বিজ্ঞাপন</span
-              >
-              <p class="font-display text-2xl font-bold">
-                স্বাধীন সাংবাদিকতাকে সমর্থন করুন
-              </p>
-            </div>
-          </div>
         </aside>
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white pt-24 pb-12">
-      <div class="max-w-[1440px] mx-auto px-6">
+    <!-- Footer Component Start -->
+    <footer
+      class="bg-black text-white border-t-[6px] border-[#E90606] relative overflow-hidden"
+    >
+      <!-- Subtle Grid Background Pattern -->
+      <div
+        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"
+      ></div>
+
+      <div class="container mx-auto px-4 lg:px-8 py-16 relative z-10">
+        <!-- Top Section: Brand & Socials -->
         <div
-          class="flex flex-col md:flex-row justify-between items-start mb-20 pb-20 border-b border-white/10"
+          class="flex flex-col md:flex-row justify-between items-start mb-16"
         >
-          <div class="max-w-md mb-12 md:mb-0">
-            <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
-              দ্য ডেইলি অরিজিন<span class="text-[#E90606]">.</span>
+          <div class="mb-10 md:mb-0">
+            <h2
+              class="font-display font-black text-4xl md:text-5xl mb-6 tracking-tight text-white drop-shadow-sm"
+            >
+              দ্য ডেইলি অরিজিন
             </h2>
-            <p class="font-serif text-gray-400 text-lg leading-relaxed">
-              সাহসী, নিরপেক্ষ এবং সত্যের প্রতি নিবেদিত। আমরা আপনার কাছে সেই
-              গল্পগুলো পৌঁছে দিই যা আপোষহীন সততার সাথে আমাদের বিশ্বকে গঠন করে।
-            </p>
+            <div
+              class="flex flex-wrap gap-4 md:gap-8 text-xs font-sans font-bold uppercase tracking-widest text-gray-500"
+            >
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >আমাদের সম্পর্কে</a
+              >
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >যোগাযোগ</a
+              >
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >ক্যারিয়ার</a
+              >
+              <a
+                href="#"
+                class="hover:text-white transition-colors duration-300"
+                >প্রেস</a
+              >
+            </div>
           </div>
-          <div class="flex flex-wrap gap-12 lg:gap-24">
-            <div>
-              <h4
-                class="text-[10px] font-bold uppercase tracking-widest mb-6 text-gray-500"
-              >
-                বিভাগসমূহ
-              </h4>
-              <ul class="space-y-3 font-serif text-gray-300">
-                <li>
-                  <a
-                    href="./category?category=World"
-                    class="hover:text-[#E90606] transition"
-                    >বিশ্ব</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="./category?category=Politics"
-                    class="hover:text-[#E90606] transition"
-                    >রাজনীতি</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="./category?category=Tech"
-                    class="hover:text-[#E90606] transition"
-                    >প্রযুক্তি</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="./category?category=Culture"
-                    class="hover:text-[#E90606] transition"
-                    >সংস্কৃতি</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4
-                class="text-[10px] font-bold uppercase tracking-widest mb-6 text-gray-500"
-              >
-                সোশ্যাল
-              </h4>
-              <div class="flex space-x-4">
-                <a href="#" class="hover:text-[#E90606] transition"
-                  ><i data-lucide="twitter" class="w-5 h-5"></i
-                ></a>
-                <a href="#" class="hover:text-[#E90606] transition"
-                  ><i data-lucide="facebook" class="w-5 h-5"></i
-                ></a>
-                <a href="#" class="hover:text-[#E90606] transition"
-                  ><i data-lucide="instagram" class="w-5 h-5"></i
-                ></a>
-              </div>
-            </div>
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="twitter"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
+            <a
+              href="#"
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="facebook"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
+            <a
+              href="#"
+              class="group w-12 h-12 border border-gray-800 flex items-center justify-center rounded-lg hover:bg-[#E90606] hover:border-[#E90606] transition-all duration-300 hover:shadow-[0_0_20px_rgba(233,6,6,0.5)]"
+            >
+              <i
+                data-lucide="instagram"
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              ></i>
+            </a>
           </div>
         </div>
+
+        <!-- Middle Section: Links Grid -->
         <div
-          class="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-600"
+          class="grid grid-cols-2 md:grid-cols-4 gap-12 text-sm text-gray-400 border-t border-gray-900 pt-12 font-serif pb-8"
         >
-          <p>&copy; ২০২৫ দ্য ডেইলি অরিজিন। সর্বস্বত্ব সংরক্ষিত।</p>
-          <div class="space-x-6 mt-4 md:mt-0">
-            <a href="#" class="hover:text-white transition">গোপনীয়তা নীতি</a>
-            <a href="#" class="hover:text-white transition"
-              >ব্যবহারের শর্তাবলী</a
+          <ul>
+            <li
+              class="mb-4 font-sans font-bold text-white uppercase tracking-widest text-xs"
             >
+              বিশ্ব
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >মার্কিন রাজনীতি</a
+              >
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >আন্তর্জাতিক সংবাদ</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li
+              class="mb-4 font-sans font-bold text-white uppercase tracking-widest text-xs"
+            >
+              উদ্ভাবন
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors">বাণিজ্য</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >প্রযুক্তি</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li
+              class="mb-4 font-sans font-bold text-white uppercase tracking-widest text-xs"
+            >
+              সংস্কৃতি
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors">বিনোদন</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >লাইফস্টাইল</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li
+              class="mb-4 font-sans font-bold text-white uppercase tracking-widest text-xs"
+            >
+              আইনগত
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >গোপনীয়তা নীতি</a
+              >
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-white transition-colors"
+                >ব্যবহারের শর্তাবলী</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Bottom Section: Copyright & Developer Credit -->
+        <div
+          class="border-t border-gray-900 mt-8 pt-8 flex flex-col-reverse md:flex-row justify-between items-center gap-8"
+        >
+          <div class="text-xs text-gray-600 font-sans">
+            © ২০২৫ দ্য ডেইলি অরিজিন
+          </div>
+          <div class="group relative inline-flex">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-red-600 via-purple-600 to-red-600 rounded-full opacity-30 group-hover:opacity-75 blur-md transition duration-500 animate-tilt"
+            ></div>
+            <div
+              class="relative flex items-center gap-3 bg-black/95 backdrop-blur-xl rounded-full pl-1.5 pr-5 py-1.5 border border-white/10 shadow-2xl ring-1 ring-white/5"
+            >
+              <a
+                href="https://shadikhossain.onrender.com"
+                target="_blank"
+                class="relative block shrink-0 group/img"
+              >
+                <div
+                  class="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-red-500 transition-colors duration-300"
+                >
+                  <img
+                    src="the_daily_origin_founder.jpg"
+                    alt="Shadik Hossain"
+                    class="w-full h-full object-cover transform group-hover/img:scale-110 transition-transform duration-500"
+                    onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Shadik+Hossain&background=18181b&color=e4e4e7';"
+                  />
+                </div>
+                <div
+                  class="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-black rounded-full"
+                ></div>
+              </a>
+              <div class="flex flex-col justify-center leading-none space-y-1">
+                <div class="flex items-center gap-1.5">
+                  <span
+                    class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold"
+                    >Built by</span
+                  >
+                  <a
+                    href="https://shadikhossain.onrender.com"
+                    target="_blank"
+                    class="text-xs font-bold text-gray-200 group-hover:text-white transition-colors hover:underline decoration-red-500/50 underline-offset-2"
+                    >Shadik Hossain</a
+                  >
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9px] text-zinc-600">Founder of</span>
+                  <a
+                    href="https://softshilpo.com"
+                    target="_blank"
+                    class="flex items-center gap-1 text-[9px] font-semibold text-red-400 hover:text-red-300 transition-colors bg-red-900/10 px-2 py-0.5 rounded-full border border-red-500/20"
+                    >SoftShilpo
+                    <i data-lucide="arrow-up-right" class="w-2.5 h-2.5"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -597,30 +833,45 @@
       const searchInput = document.getElementById("search-input");
       const dateEl = document.getElementById("current-date");
 
-      // --- Helper Functions ---
+      // --- Updated Translations ---
       const categoryTranslations = {
+        National: "জাতীয়",
         World: "বিশ্ব",
         Politics: "রাজনীতি",
-        Tech: "প্রযুক্তি",
-        Culture: "সংস্কৃতি",
-        Sports: "খেলাধুলা",
+        Election: "নির্বাচন",
         Business: "বাণিজ্য",
-        Health: "স্বাস্থ্য",
+        Tech: "প্রযুক্তি",
         Science: "বিজ্ঞান",
+        Health: "স্বাস্থ্য",
+        Entertainment: "বিনোদন",
+        Sports: "খেলাধুলা",
+        Opinion: "মতামত",
         Others: "অন্যান্য",
+      };
+
+      const categoryDescriptions = {
+        National: "সমগ্র বাংলাদেশ থেকে সর্বশেষ সংবাদ, রাজনীতি এবং ঘটনাপ্রবাহ।",
+        Election: "নির্বাচন ২০২৫ এর সর্বশেষ আপডেট, ফলাফল এবং বিশ্লেষণ।",
+        Business: "অর্থনীতি, বাজার এবং কর্পোরেট জগতের গভীর বিশ্লেষণ।",
+        Entertainment: "চলচ্চিত্র, নাটক, সঙ্গীত এবং তারকাদের সর্বশেষ খবর।",
+        Opinion: "বিশ্লেষকদের কলাম, সম্পাদকীয় এবং ভিন্নধর্মী দৃষ্টিভঙ্গি।",
+        Tech: "গ্যাজেট, উদ্ভাবন এবং ডিজিটাল দুনিয়ার নতুন খবর।",
+        World: "আন্তর্জাতিক রাজনীতির পালাবদল এবং বৈশ্বিক ঘটনাপ্রবাহ।",
+        Sports: "ক্রিকেট, ফুটবল এবং অন্যান্য খেলার সজীব আপডেট।",
       };
 
       function getCategoryFromUrl() {
         const params = new URLSearchParams(window.location.search);
-        let category = params.get("category") || "World";
-        // Capitalize first letter
-        return (
-          category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()
-        );
+        let category = params.get("category") || "National"; // Default to National if empty
+        return category.charAt(0).toUpperCase() + category.slice(1);
       }
 
       function getCategoryLabel(catKey) {
-        const key = catKey.charAt(0).toUpperCase() + catKey.slice(1);
+        // Handle case sensitivity loosely
+        const key =
+          Object.keys(categoryTranslations).find(
+            (k) => k.toLowerCase() === catKey.toLowerCase()
+          ) || catKey;
         return categoryTranslations[key] || key;
       }
 
@@ -636,6 +887,78 @@
           month: "long",
           day: "numeric",
         });
+      }
+
+      // --- DYNAMIC SEO FUNCTION (NEW) ---
+      function updateDynamicSEO(categoryKey, categoryLabel) {
+        const title = `${categoryLabel} | দ্য ডেইলি অরিজিন - সংবাদ ও বিশ্লেষণ`;
+        const description =
+          categoryDescriptions[categoryKey] ||
+          `${categoryLabel} বিভাগে সর্বশেষ সংবাদ এবং বিশ্লেষণ পড়ুন। দ্য ডেইলি অরিজিন - বাংলাদেশের নির্ভরযোগ্য সংবাদ মাধ্যম।`;
+        const url = `https://bn.thedailyorigin.net/category?category=${categoryKey}`;
+
+        // 1. Update Title
+        document.title = title;
+
+        // 2. Update Meta Description
+        document
+          .getElementById("dynamic-description")
+          .setAttribute("content", description);
+
+        // 3. Update Canonical
+        document.getElementById("dynamic-canonical").setAttribute("href", url);
+
+        // 4. Update Open Graph
+        document.getElementById("og-title").setAttribute("content", title);
+        document
+          .getElementById("og-description")
+          .setAttribute("content", description);
+        document.getElementById("og-url").setAttribute("content", url);
+
+        // 5. Update Twitter
+        document.getElementById("tw-title").setAttribute("content", title);
+        document
+          .getElementById("tw-description")
+          .setAttribute("content", description);
+
+        // 6. Inject JSON-LD Schema (CollectionPage)
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          headline: title,
+          description: description,
+          url: url,
+          publisher: {
+            "@type": "Organization",
+            name: "The Daily Origin",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://bn.thedailyorigin.net/logo.png",
+            },
+          },
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://bn.thedailyorigin.net/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: categoryLabel,
+                item: url,
+              },
+            ],
+          },
+        };
+
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.text = JSON.stringify(schema);
+        document.head.appendChild(script);
       }
 
       // --- HTML Generators ---
@@ -668,9 +991,11 @@
                         আরও পড়ুন <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </div>
                 </div>
-                 <div class="md:col-span-5 relative aspect-[4/3] overflow-hidden order-1 md:order-2">
+                 <div class="md:col-span-5 relative aspect-[4/3] overflow-hidden order-1 md:order-2 bg-gray-100">
                      <img src="${image}" alt="${article.title}" 
-                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" onerror="this.src='https://source.unsplash.com/random/800x600?sig=${
+                            article.id
+                          }'">
                 </div>
             </article>
             <hr class="border-gray-100 last:hidden" />
@@ -692,12 +1017,11 @@
 
       // --- Initialization ---
       let app, db, auth;
-      let currentCategoryKey = getCategoryFromUrl(); // e.g., "World"
-      let currentCategoryLabel = getCategoryLabel(currentCategoryKey); // e.g., "বিশ্ব"
-      let allArticlesCache = []; // For client-side search filtering
+      let currentCategoryKey = getCategoryFromUrl();
+      let currentCategoryLabel = getCategoryLabel(currentCategoryKey);
+      let allArticlesCache = [];
 
       function init() {
-        // Set Date
         const options = {
           weekday: "long",
           year: "numeric",
@@ -707,21 +1031,29 @@
         if (dateEl)
           dateEl.innerText = new Date().toLocaleDateString("bn-BD", options);
 
-        // Update Title
-        document.title = `${currentCategoryLabel} - দ্য ডেইলি অরিজিন`;
+        // TRIGGER SEO UPDATE HERE
+        updateDynamicSEO(currentCategoryKey, currentCategoryLabel);
+
         if (categoryHeaderTitle)
           categoryHeaderTitle.innerText = currentCategoryLabel;
+        if (
+          categoryHeaderDescription &&
+          categoryDescriptions[currentCategoryKey]
+        ) {
+          categoryHeaderDescription.innerText =
+            categoryDescriptions[currentCategoryKey];
+        }
 
-        // Setup Icons
+        // Highlight active nav link
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          if (link.href.includes(currentCategoryKey))
+            link.classList.add("text-[#E90606]", "after:w-full");
+        });
+
         lucide.createIcons();
-
-        // Setup Mobile Menu
         setupMobileMenu();
-
-        // Setup Search
         setupSearch();
 
-        // Firebase
         app = initializeApp(firebaseConfig);
         db = getFirestore(app);
         auth = getAuth(app);
@@ -773,14 +1105,13 @@
             searchInput.focus();
           } else {
             searchInput.value = "";
-            filterArticles(""); // Reset filter
+            filterArticles("");
           }
         }
 
         if (toggle) toggle.addEventListener("click", toggleSearch);
         if (close) close.addEventListener("click", toggleSearch);
 
-        // Client-side search logic
         searchInput.addEventListener("keyup", (e) => {
           filterArticles(e.target.value);
         });
@@ -802,7 +1133,7 @@
 
       function renderMainArticles(articles) {
         if (articles.length === 0) {
-          articlesListContainer.innerHTML = `<div class="py-12 text-center border border-dashed border-gray-300 rounded"><p class="font-serif text-xl text-gray-500 italic">আপনার অনুসন্ধান অনুযায়ী কোনো গল্প পাওয়া যায়নি।</p></div>`;
+          articlesListContainer.innerHTML = `<div class="py-12 text-center border border-dashed border-gray-300 rounded"><p class="font-serif text-xl text-gray-500 italic">এই বিভাগে এখন কোনো খবর নেই।</p></div>`;
           return;
         }
         articlesListContainer.innerHTML = articles
@@ -817,9 +1148,7 @@
           `artifacts/${appId}/public/data/articles`
         );
 
-        // 1. Category Query
-        // Note: The database likely still stores categories as "World", "Tech" etc.
-        // So we query with currentCategoryKey (English), but display in Bangla.
+        // Query by Category
         const catQuery = query(
           articlesRef,
           where("category", "==", currentCategoryKey)
@@ -827,16 +1156,14 @@
 
         onSnapshot(catQuery, (snap) => {
           if (snap.empty) {
-            articlesListContainer.innerHTML = `<p class="text-xl font-serif italic text-gray-500">${currentCategoryLabel} বিভাগে কোনো খবর পাওয়া যায়নি।</p>`;
+            articlesListContainer.innerHTML = `<div class="py-12 text-center border border-dashed border-gray-300 rounded"><p class="font-serif text-xl text-gray-500 italic">${currentCategoryLabel} বিভাগে কোনো খবর পাওয়া যায়নি।</p></div>`;
             allArticlesCache = [];
           } else {
             let articles = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-            // Client-side sort
             articles.sort(
               (a, b) =>
                 (b.publishedAt?.seconds || 0) - (a.publishedAt?.seconds || 0)
             );
-
             allArticlesCache = articles;
             renderMainArticles(articles);
           }
@@ -844,33 +1171,30 @@
           setTimeout(() => (loadingOverlay.style.display = "none"), 500);
         });
 
-        // 2. Sidebar Query (Just some recent items)
-        // We limit to 5 to not overwhelm
-        const sidebarQuery = query(articlesRef, limit(5));
+        // Sidebar Items (Just generic recent items for now, could be trending)
+        const sidebarQuery = query(articlesRef, limit(6));
         onSnapshot(sidebarQuery, (snap) => {
           if (!snap.empty) {
             let articles = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-            // Filter out current category if possible to show variety, or just show top
+            // Remove duplicates from main list if possible, but simple limit is fine for now
             sidebarListContainer.innerHTML = articles
-              .slice(0, 5)
+              .slice(0, 6)
               .map(createSidebarArticleHTML)
               .join("");
           }
         });
 
-        // 3. Breaking News Ticker
+        // Ticker
         const breakingQuery = query(
           articlesRef,
-          where("isBreaking", "==", true)
+          where("isBreaking", "==", true),
+          limit(5)
         );
         onSnapshot(breakingQuery, (snap) => {
           const tickerContainer = document.getElementById(
             "breaking-news-ticker"
           );
           if (!tickerContainer) return;
-
-          let content = "";
-
           if (!snap.empty) {
             const items = snap.docs
               .map(
@@ -882,19 +1206,11 @@
                   }</a>`
               )
               .join("");
-            // Wrap in ticker-content for CSS animation
-            content = `<div class="ticker-content">${items}</div><div class="ticker-content">${items}</div>`;
-          } else {
-            // Fallback content
-            const fallbackItems = `<span class="mx-8 text-sm font-bold uppercase tracking-widest flex items-center"><span class="text-black font-black mr-2">/</span> দ্য ডেইলি অরিজিনে স্বাগতম।</span><span class="mx-8 text-sm font-bold uppercase tracking-widest flex items-center"><span class="text-black font-black mr-2">/</span> নিরপেক্ষ। নির্ভীক। আপোষহীন।</span>`;
-            content = `<div class="ticker-content">${fallbackItems}</div><div class="ticker-content">${fallbackItems}</div>`;
+            tickerContainer.innerHTML = `<div class="ticker-content">${items}</div><div class="ticker-content">${items}</div>`;
           }
-
-          tickerContainer.innerHTML = content;
         });
       }
 
-      // Run
       init();
     </script>
   </body>
