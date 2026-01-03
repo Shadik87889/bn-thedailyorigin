@@ -228,6 +228,10 @@
           transform: rotate(360deg);
         }
       }
+
+      .hidden-force {
+        display: none !important;
+      }
     </style>
   </head>
   <body class="h-screen flex flex-col overflow-hidden">
@@ -334,19 +338,22 @@
             <i data-lucide="users" class="w-5 h-5 mr-3"></i> লেখকবৃন্দ
           </button>
 
-          <div class="px-6 mt-8 mb-2">
-            <p
-              class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
-            >
-              সিস্টেম
-            </p>
+          <div id="sidebar-system-section">
+            <div class="px-6 mt-8 mb-2">
+              <p
+                class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
+              >
+                সিস্টেম
+              </p>
+            </div>
+            <button data-view="users" class="sidebar-link w-full">
+              <i data-lucide="shield" class="w-5 h-5 mr-3"></i> অ্যাক্সেস
+              কন্ট্রোল
+            </button>
+            <button data-view="settings" class="sidebar-link w-full">
+              <i data-lucide="settings" class="w-5 h-5 mr-3"></i> সেটিংস
+            </button>
           </div>
-          <button data-view="users" class="sidebar-link w-full">
-            <i data-lucide="shield" class="w-5 h-5 mr-3"></i> অ্যাক্সেস কন্ট্রোল
-          </button>
-          <button data-view="settings" class="sidebar-link w-full">
-            <i data-lucide="settings" class="w-5 h-5 mr-3"></i> সেটিংস
-          </button>
         </nav>
 
         <div class="p-4 border-t border-gray-900 bg-[#0a0a0a]">
@@ -363,7 +370,10 @@
               >
                 user@example.com
               </p>
-              <p class="text-[10px] text-gray-500 uppercase tracking-wider">
+              <p
+                class="text-[10px] text-gray-500 uppercase tracking-wider"
+                id="user-role-display"
+              >
                 অনলাইন
               </p>
             </div>
@@ -629,6 +639,73 @@
       </div>
     </dialog>
 
+    <!-- NEW: User Role Modal -->
+    <dialog
+      id="user-modal"
+      class="bg-white p-0 rounded-lg shadow-2xl max-w-md w-full backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    >
+      <div
+        class="p-6 border-b border-gray-100 flex justify-between items-center"
+      >
+        <h3 class="font-display font-bold text-xl">ব্যবহারকারী যোগ করুন</h3>
+        <button id="user-modal-close" class="text-gray-400 hover:text-black">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-6">
+        <form id="user-role-form" class="space-y-4">
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+              >User UID (Firebase Auth ID)</label
+            >
+            <input
+              type="text"
+              id="new-user-uid"
+              class="input-field font-mono text-sm"
+              placeholder="e.g. 5y78..."
+              required
+            />
+            <p class="text-[10px] text-gray-400 mt-1">
+              ব্যবহারকারীর প্রোফাইল তৈরি করতে তাদের সঠিক UID প্রয়োজন।
+            </p>
+          </div>
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+              >ইমেইল (রেফারেন্সের জন্য)</label
+            >
+            <input
+              type="email"
+              id="new-user-email"
+              class="input-field"
+              placeholder="user@example.com"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+              >রোল</label
+            >
+            <select id="new-user-role" class="input-field">
+              <option value="writer">Writer</option>
+              <option value="superadmin">Superadmin</option>
+            </select>
+          </div>
+          <div class="pt-4 flex justify-end gap-3">
+            <button
+              type="button"
+              id="user-modal-cancel"
+              class="btn-outline py-2"
+            >
+              বাতিল
+            </button>
+            <button type="submit" class="btn-primary py-2">সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
     <!-- Toast Notification -->
     <div
       id="toast-notification"
@@ -782,7 +859,7 @@
       // --- View Renderers ---
 
       function renderArticlesView(container) {
-        const isSuperAdmin = currentUserRole === "superadmin";
+        // Writers can create, edit, delete. Same view for everyone.
         container.innerHTML = `
             <div class="space-y-6">
                 <!-- Stats Row -->
@@ -828,7 +905,6 @@
                 </div>
 
                 <!-- Table (Hidden < md) -->
-                <!-- Removed overflow-x-auto to fix dropdown clipping on desktop. If table overflows, default scroll is acceptable for admin panel -->
                 <div class="hidden md:block bg-white border border-gray-200 overflow-visible min-h-[400px]">
                     <table class="w-full text-left cms-table">
                         <thead>
@@ -872,6 +948,7 @@
 
       function renderArticleRows(articles) {
         // Dropdown actions HTML generator (Bengali)
+        // Writers CAN create, edit, delete articles. So they get the menu.
         const getActionMenu = (id, context) => `
             <div class="relative inline-block text-left">
                 <button class="action-dropdown-btn p-2 hover:bg-gray-100 rounded-full transition-colors" data-menu-id="menu-${context}-${id}">
@@ -1025,10 +1102,19 @@
       }
 
       function renderAuthorsView(container) {
+        // CHANGE: Allow both superadmin and writer to manage authors
+        const canManageAuthors = ["superadmin", "writer"].includes(
+          currentUserRole
+        );
+
         container.innerHTML = `
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 ${
+              canManageAuthors ? "lg:grid-cols-3" : ""
+            } gap-8">
                 <!-- List -->
-                <div class="lg:col-span-2 space-y-4">
+                <div class="${
+                  canManageAuthors ? "lg:col-span-2" : "col-span-1"
+                } space-y-4">
                      <div class="flex justify-between items-center mb-4">
                         <h2 class="text-2xl font-bold font-display">লেখক তালিকা</h2>
                     </div>
@@ -1036,7 +1122,13 @@
                     <!-- Desktop Table (Hidden on Mobile) -->
                     <div class="hidden md:block bg-white border border-gray-200">
                         <table class="w-full text-left cms-table">
-                            <thead><tr><th>প্রোফাইল</th><th>নাম</th><th>বিবরণ</th><th class="text-right">অ্যাকশন</th></tr></thead>
+                            <thead><tr><th>প্রোফাইল</th><th>নাম</th><th>বিবরণ</th>
+                            ${
+                              canManageAuthors
+                                ? '<th class="text-right">অ্যাকশন</th>'
+                                : ""
+                            }
+                            </tr></thead>
                             <tbody id="authors-tbody"></tbody>
                         </table>
                     </div>
@@ -1045,7 +1137,10 @@
                     <div id="authors-mobile-list" class="md:hidden space-y-4"></div>
                 </div>
 
-                <!-- Form -->
+                <!-- Form (Visible for SuperAdmin AND Writer) -->
+                ${
+                  canManageAuthors
+                    ? `
                 <div class="lg:col-span-1">
                     <div class="bg-white p-6 border border-gray-200 shadow-sm sticky top-6">
                         <h3 id="author-form-title" class="font-display font-bold text-xl mb-4">নতুন লেখক যোগ করুন</h3>
@@ -1069,49 +1164,58 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>`
+                    : ""
+                }
             </div>
           `;
 
         renderAuthorRows();
 
-        // Form Logic
-        const form = document.getElementById("author-form");
-        const cancelBtn = document.getElementById("author-cancel");
+        // Form Logic - Attach if user has permission
+        if (canManageAuthors) {
+          const form = document.getElementById("author-form");
+          const cancelBtn = document.getElementById("author-cancel");
 
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const id = document.getElementById("author-id").value;
-          const data = {
-            name: document.getElementById("author-name").value,
-            bio: document.getElementById("author-bio").value,
-            imageUrl: document.getElementById("author-image").value,
-          };
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const id = document.getElementById("author-id").value;
+            const data = {
+              name: document.getElementById("author-name").value,
+              bio: document.getElementById("author-bio").value,
+              imageUrl: document.getElementById("author-image").value,
+            };
 
-          try {
-            if (id) await updateDoc(doc(db, paths.authors, id), data);
-            else await addDoc(collection(db, paths.authors), data);
-            showToast("লেখকের প্রোফাইল সংরক্ষিত হয়েছে।");
+            try {
+              if (id) await updateDoc(doc(db, paths.authors, id), data);
+              else await addDoc(collection(db, paths.authors), data);
+              showToast("লেখকের প্রোফাইল সংরক্ষিত হয়েছে।");
+              form.reset();
+              document.getElementById("author-id").value = "";
+              document.getElementById("author-form-title").textContent =
+                "নতুন লেখক যোগ করুন";
+              cancelBtn.classList.add("hidden");
+            } catch (err) {
+              showToast(err.message, true);
+            }
+          });
+
+          cancelBtn.addEventListener("click", () => {
             form.reset();
             document.getElementById("author-id").value = "";
             document.getElementById("author-form-title").textContent =
               "নতুন লেখক যোগ করুন";
             cancelBtn.classList.add("hidden");
-          } catch (err) {
-            showToast(err.message, true);
-          }
-        });
-
-        cancelBtn.addEventListener("click", () => {
-          form.reset();
-          document.getElementById("author-id").value = "";
-          document.getElementById("author-form-title").textContent =
-            "নতুন লেখক যোগ করুন";
-          cancelBtn.classList.add("hidden");
-        });
+          });
+        }
       }
 
       function renderAuthorRows() {
+        // CHANGE: Permission check updated
+        const canManageAuthors = ["superadmin", "writer"].includes(
+          currentUserRole
+        );
+
         // Desktop Render
         const tbody = document.getElementById("authors-tbody");
         if (tbody) {
@@ -1126,14 +1230,15 @@
                     <td class="text-sm text-gray-500 truncate max-w-[150px]">${
                       a.bio || ""
                     }</td>
+                    ${
+                      canManageAuthors
+                        ? `
                     <td class="text-right space-x-1">
-                        <button class="text-blue-600 hover:text-blue-800 p-1 edit-author-btn" data-id="${
-                          a.id
-                        }"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
-                        <button class="text-red-400 hover:text-red-600 p-1 delete-author-btn" data-id="${
-                          a.id
-                        }"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                    </td>
+                        <button class="text-blue-600 hover:text-blue-800 p-1 edit-author-btn" data-id="${a.id}"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
+                        <button class="text-red-400 hover:text-red-600 p-1 delete-author-btn" data-id="${a.id}"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </td>`
+                        : ""
+                    }
                 </tr>
             `
             )
@@ -1162,18 +1267,19 @@
                               a.bio || "কোনো বিবরণ নেই"
                             }</p>
                         </div>
+                        ${
+                          canManageAuthors
+                            ? `
                         <div class="flex flex-col gap-2">
-                             <button class="text-blue-600 hover:text-blue-800 p-1 edit-author-btn" data-id="${
-                               a.id
-                             }">
+                             <button class="text-blue-600 hover:text-blue-800 p-1 edit-author-btn" data-id="${a.id}">
                                 <i data-lucide="edit-2" class="w-4 h-4"></i>
                              </button>
-                             <button class="text-red-400 hover:text-red-600 p-1 delete-author-btn" data-id="${
-                               a.id
-                             }">
+                             <button class="text-red-400 hover:text-red-600 p-1 delete-author-btn" data-id="${a.id}">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
                              </button>
-                        </div>
+                        </div>`
+                            : ""
+                        }
                     </div>
                 `
               )
@@ -1181,47 +1287,72 @@
           }
         }
 
-        // Event Listeners (Applied to both Desktop and Mobile buttons)
-        document.querySelectorAll(".edit-author-btn").forEach((b) =>
-          b.addEventListener("click", () => {
-            const auth = authorsCache.find((x) => x.id === b.dataset.id);
-            document.getElementById("author-id").value = auth.id;
-            document.getElementById("author-name").value = auth.name;
-            document.getElementById("author-bio").value = auth.bio || "";
-            document.getElementById("author-image").value = auth.imageUrl || "";
-            document.getElementById("author-form-title").textContent =
-              "লেখক সম্পাদনা";
-            document.getElementById("author-cancel").classList.remove("hidden");
-
-            // Scroll to form on mobile
-            if (window.innerWidth < 1024) {
+        // Event Listeners (If permitted)
+        if (canManageAuthors) {
+          document.querySelectorAll(".edit-author-btn").forEach((b) =>
+            b.addEventListener("click", () => {
+              const auth = authorsCache.find((x) => x.id === b.dataset.id);
+              document.getElementById("author-id").value = auth.id;
+              document.getElementById("author-name").value = auth.name;
+              document.getElementById("author-bio").value = auth.bio || "";
+              document.getElementById("author-image").value =
+                auth.imageUrl || "";
+              document.getElementById("author-form-title").textContent =
+                "লেখক সম্পাদনা";
               document
-                .getElementById("author-form")
-                .scrollIntoView({ behavior: "smooth" });
-            }
-          })
-        );
+                .getElementById("author-cancel")
+                .classList.remove("hidden");
 
-        document.querySelectorAll(".delete-author-btn").forEach((b) =>
-          b.addEventListener("click", () => {
-            // Check dependency
-            const hasArticles = articlesCache.some(
-              (art) => art.authorId === b.dataset.id
-            );
-            if (hasArticles)
-              showToast("মুছে ফেলা যাবে না: লেখকের সক্রিয় নিবন্ধ আছে।", true);
-            else openDeleteModal(b.dataset.id, "author");
-          })
-        );
+              // Scroll to form on mobile
+              if (window.innerWidth < 1024) {
+                document
+                  .getElementById("author-form")
+                  .scrollIntoView({ behavior: "smooth" });
+              }
+            })
+          );
+
+          document.querySelectorAll(".delete-author-btn").forEach((b) =>
+            b.addEventListener("click", () => {
+              // Check dependency
+              const hasArticles = articlesCache.some(
+                (art) => art.authorId === b.dataset.id
+              );
+              if (hasArticles)
+                showToast(
+                  "মুছে ফেলা যাবে না: লেখকের সক্রিয় নিবন্ধ আছে।",
+                  true
+                );
+              else openDeleteModal(b.dataset.id, "author");
+            })
+          );
+        }
 
         lucide.createIcons();
       }
 
       function renderUsersView(container) {
+        // Double check safety: This view should not be reachable by writer via sidebar,
+        // but if they call renderUsersView manually, show denied.
+        if (currentUserRole !== "superadmin") {
+          container.innerHTML = `
+            <div class="h-full flex flex-col items-center justify-center text-center p-8">
+                <i data-lucide="shield-alert" class="w-16 h-16 text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold font-display text-gray-900">প্রবেশাধিকার সংরক্ষিত</h2>
+                <p class="text-gray-500 mt-2">আপনার এই পেজটি দেখার অনুমতি নেই।</p>
+            </div>
+            `;
+          lucide.createIcons();
+          return;
+        }
+
         container.innerHTML = `
              <div class="max-w-4xl mx-auto space-y-6">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold font-display">সিস্টেম অ্যাক্সেস কন্ট্রোল</h2>
+                    <button id="add-user-btn" class="btn-primary flex items-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i> নতুন ইউজার
+                    </button>
                 </div>
                 
                 <div class="bg-blue-50 border border-blue-100 p-4 flex items-start gap-3">
@@ -1244,11 +1375,16 @@
 
         const renderUserRow = (u) => `
              <tr>
-                <td class="font-mono text-xs text-gray-600">${u.id} ${
-          u.id === currentUser.uid
-            ? '<span class="ml-2 badge badge-gray">আপনি</span>'
-            : ""
-        }</td>
+                <td class="py-3">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-sm text-gray-900">${
+                          u.email || "No Email"
+                        }</span>
+                        <span class="font-mono text-[10px] text-gray-400">${
+                          u.id
+                        }</span>
+                    </div>
+                </td>
                 <td>
                     <select class="input-field py-1 text-sm w-40 role-select" data-id="${
                       u.id
@@ -1260,6 +1396,11 @@
                           u.role === "superadmin" ? "selected" : ""
                         }>Superadmin</option>
                     </select>
+                    ${
+                      u.id === currentUser.uid
+                        ? '<span class="ml-2 badge badge-gray">আপনি</span>'
+                        : ""
+                    }
                 </td>
                 <td class="text-right">
                     <button class="text-red-400 hover:text-red-600 user-delete-btn" data-id="${
@@ -1273,13 +1414,18 @@
 
         const renderUserCard = (u) => `
              <div class="bg-white p-4 border border-gray-200 shadow-sm rounded flex flex-col gap-3">
-                <div class="flex justify-between items-center border-b border-gray-100 pb-2">
-                    <span class="font-mono text-xs text-gray-500 truncate max-w-[200px]">${
-                      u.id
-                    }</span>
+                <div class="flex justify-between items-start border-b border-gray-100 pb-2">
+                    <div class="flex flex-col min-w-0">
+                        <span class="font-bold text-sm text-gray-900 truncate">${
+                          u.email || "No Email"
+                        }</span>
+                        <span class="font-mono text-[10px] text-gray-400 truncate w-full">${
+                          u.id
+                        }</span>
+                    </div>
                     ${
                       u.id === currentUser.uid
-                        ? '<span class="badge badge-gray">আপনি</span>'
+                        ? '<span class="badge badge-gray flex-shrink-0">আপনি</span>'
                         : ""
                     }
                 </div>
@@ -1311,6 +1457,56 @@
         const mobileList = document.getElementById("users-mobile-list");
         if (mobileList)
           mobileList.innerHTML = usersCache.map(renderUserCard).join("");
+
+        // Event Listeners for User Management
+        document
+          .getElementById("add-user-btn")
+          .addEventListener("click", () => {
+            const modal = document.getElementById("user-modal");
+            document.getElementById("user-role-form").reset();
+            modal.showModal();
+          });
+
+        const closeUserModal = () =>
+          document.getElementById("user-modal").close();
+        document
+          .getElementById("user-modal-close")
+          .addEventListener("click", closeUserModal);
+        document
+          .getElementById("user-modal-cancel")
+          .addEventListener("click", closeUserModal);
+
+        document
+          .getElementById("user-role-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const uid = document.getElementById("new-user-uid").value.trim();
+            const email = document
+              .getElementById("new-user-email")
+              .value.trim();
+            const role = document.getElementById("new-user-role").value;
+
+            if (!uid) return showToast("UID প্রয়োজন", true);
+
+            try {
+              // We use setDoc with merge: true so we don't overwrite if it exists,
+              // but here we likely want to set the role explicitly.
+              await setDoc(
+                doc(db, paths.roles, uid),
+                {
+                  role: role,
+                  email: email, // Storing email for display reference only
+                },
+                { merge: true }
+              );
+
+              showToast("ব্যবহারকারী সফলভাবে যোগ করা হয়েছে।");
+              closeUserModal();
+            } catch (err) {
+              console.error(err);
+              showToast("ত্রুটি: " + err.message, true);
+            }
+          });
 
         document.querySelectorAll(".role-select").forEach((s) =>
           s.addEventListener("change", async (e) => {
@@ -1508,6 +1704,23 @@
                 currentUserRole = roleSnap.data().role;
                 document.getElementById("user-email-display").textContent =
                   user.email;
+                document.getElementById("user-role-display").textContent =
+                  currentUserRole === "superadmin"
+                    ? "SUPERADMIN"
+                    : currentUserRole === "writer"
+                    ? "WRITER"
+                    : "UNKNOWN";
+
+                // UI Adjustments for Role
+                if (currentUserRole !== "superadmin") {
+                  document
+                    .getElementById("sidebar-system-section")
+                    .classList.add("hidden");
+                } else {
+                  document
+                    .getElementById("sidebar-system-section")
+                    .classList.remove("hidden");
+                }
 
                 // Load Data
                 startListeners();
@@ -1579,7 +1792,7 @@
             renderAuthorsView(document.getElementById("content-view"));
         });
 
-        // Roles (Users)
+        // Roles (Users) - Only fetch if SuperAdmin
         if (currentUserRole === "superadmin") {
           onSnapshot(collection(db, paths.roles), (snap) => {
             usersCache = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
